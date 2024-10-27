@@ -1,0 +1,24 @@
+---
+layout: page
+---
+
+{{ content }}
+
+<h2>Featured Projects</h2>
+
+{% assign breakout_projects = site.projects | where: "ctto_breakout", true | sort: 'last_active' | reverse %}
+{% assign non_breakout_projects = site.projects | where_exp: "project", "project.ctto_breakout != true" | sort: 'last_active' | reverse %}
+
+<h3>CTTO Breakout Projects</h3>
+<ul>
+  {% for project in breakout_projects %}
+    {% include project_item.html project=project %}
+  {% endfor %}
+</ul>
+
+<h3>Other Local Projects</h3>
+<ul>
+  {% for project in non_breakout_projects %}
+    {% include project_item.html project=project %}
+  {% endfor %}
+</ul>

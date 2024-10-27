@@ -1,0 +1,55 @@
+---
+layout: home
+title: Civic Tech Toronto
+---
+
+<!-- Set title and description in config.yml -->
+
+<p class="lead">We are bringing together an enthusiastic pack of people, to work together, learn together and create civic tech.</p>
+
+<a class="btn" href="https://guild.host/ctto/events" target="_blank">Upcoming Hacknights</a> <a class="btn secondary" href="/hacknights/">Learn more</a>
+<br>
+
+
+<hr/>
+
+<div>
+    <h2>Get Involved</h2>
+    <p>Getting started is easy, some ways you can get involved in Civic Tech Toronto:</p>
+    <div class="grid-3">
+        <a class="card" href="/hacknights/">
+                <h3>Attend Hacknights</h3>
+                <p>The easiest way to get involved is to come out to one of our weekly hacknights!</p>
+        </a>
+        <a class="card" href="/projects/">
+                <h3>Join a Project</h3>
+                <p>Join a project…</p>
+        </a>
+        <a class="card" href="/support/">
+            <h3>Become a Volunteer</h3>
+            <p>Many ways to support our community, we are volunteer run and operaters</p>
+        </a>
+    </div>
+</div>
+
+<hr/>
+
+<div>
+    <h2>What is Civic Tech?</h2>
+    <p><strong>TL;DR: The intersection of technology and public life.</strong></p>
+    <p>A civic philosophy and a community using technology to improve public, government, and civic process and services, or to address issues of shared public concern using methods of development that are user-centred, iterative, data-driven, open sourced, and collaborative.</p>
+    <p>See our <a href="/projects/">Toronto projects list</a> and <a href="/resources/">resources page</a> for reference and more information.</p>
+
+    <h3>Current Featured Projects</h3>
+
+    {% assign breakout_projects = site.projects | where: "feature", true | sort: 'last_active' | reverse %}
+
+    <div class="grid-3">
+    {% for project in breakout_projects %}
+    {% include project_feature.html project=project %}
+    {% endfor %}
+    </div>
+
+    <a class="btn" href="/projects/">All Projects</a>
+
+</div>
