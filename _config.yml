@@ -38,6 +38,7 @@ minima:
   social_links: # refer to https://github.com/jekyll/minima/tree/master?tab=readme-ov-file#social-networks
     - { platform: github,  user_url: "https://github.com/civictechto" }
     - { platform: youtube, user_url: "https://www.youtube.com/@CivicTechTO/videos" }
+    - { platform: linkedin, user_url: "https://www.linkedin.com/company/civictechto/" }
 
 
 # Plugins
