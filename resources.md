@@ -15,7 +15,7 @@ A page for sharing Civic Tech Toronto community resources.
 - City of Toronto Open Data Portal: [open.toronto.ca](https://open.toronto.ca/)
 - Government of Ontario [data.ontario.ca](https://data.ontario.ca/)
 - Government of Canada [open.canada.ca](https://open.canada.ca)
-- Canadian Urban Data Catoluge (CUDC) [data.urbandatacentre.ca](https://data.urbandatacentre.ca)
+- Canadian Urban Data Catalogue (CUDC) [data.urbandatacentre.ca](https://data.urbandatacentre.ca)
 
 ---
 
