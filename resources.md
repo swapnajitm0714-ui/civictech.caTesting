@@ -1,16 +1,14 @@
 ---
-layout: page
 title: Resources
+layout: page
 display_title: Civic Tech Resources
-permalink: /resources/
+permalink: "/resources/"
 ---
 
 A page for sharing Civic Tech Toronto community resources.
 
 ---
-
 ## Local Resources
-
 ### Open Data
 - City of Toronto Open Data Portal: [open.toronto.ca](https://open.toronto.ca/)
 - Government of Ontario [data.ontario.ca](https://data.ontario.ca/)
@@ -18,7 +16,6 @@ A page for sharing Civic Tech Toronto community resources.
 - Canadian Urban Data Catalogue (CUDC) [data.urbandatacentre.ca](https://data.urbandatacentre.ca)
 
 ---
-
 ## Civic Tech Resources
 
 - Digital Public Goods Alliance [digitalpublicgoods.net/digital-public-goods](https://www.digitalpublicgoods.net/digital-public-goods)

@@ -11,7 +11,6 @@ title: Civic Tech Toronto
 <img class="mtb2rem" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Xxa_76MMH0ebyIgB_XemRg.jpeg" alt="The BikeSpace team works on their project during a Civic Tech Toronto hacknight in 2018. (Photo courtesy of Civic Tech Toronto)">
 <br>
 
-
 <hr/>
 
 <div>
@@ -43,11 +42,10 @@ title: Civic Tech Toronto
 
     <h3>Current Featured Projects</h3>
 
-    {% assign breakout_projects = site.projects | where: "feature", true | sort: 'last_active' | reverse %}
-
+    {% assign breakout_projects = site.data.projects | where: 'feature', 'TRUE' | sort: 'last_active' | reverse %}
     <div class="grid-3">
-    {% for project in breakout_projects %}
-    {% include project_feature.html project=project %}
+    {% for project in breakout_projects limit:3 %}
+        {% include project_feature_card.html project=project %}
     {% endfor %}
     </div>
 

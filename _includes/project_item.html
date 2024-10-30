@@ -1,14 +1,9 @@
-<li>
-    <p>
-        <a class="post-link" href="{{ project.url }}">{{ project.title }}</a>
-        {% if project.last_active %}
-        |  Last Active: {{ project.last_active }}
-        {% endif %}
-        {% if project.websites %}
-        |  <a href="{{ project.websites }}" target="_blank">{{ project.websites }}</a>
-        {% endif %}
-    </p>
-    {% if project.description %}
-    <p>Description: {{ project.description }}</p>
-    {% endif %}
-</li>
+<div class="">
+    <p><strong>{{project.name}}</strong></p>
+    {% if project.description %}<p>{{project.description}}</p>{% endif %}
+    <ul>
+        {% if project.website %}<li><a href="{{project.website}}">{{project.website}}</a></li>{% endif %}
+        {% if project.github %}<li><a href="{{project.github}}">{{project.github}}</a></li>{% endif %}
+        {% if project.video %}<li><a href="{{project.video}}">{{project.video}}</a></li>{% endif %}
+    </ul>
+</div>

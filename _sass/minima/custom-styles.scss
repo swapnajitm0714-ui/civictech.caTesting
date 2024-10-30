@@ -68,7 +68,19 @@ a.btn {
 
 .grid-3{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-unit * .5;
+    margin-bottom: $spacing-unit;
+
+    @include media-query($on-palm) {
+        grid-template-columns: 1fr;
+      }
+    
+}
+
+.grid-1{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
     gap: $spacing-unit * .5;
     margin-bottom: $spacing-unit;
 

@@ -1,8 +1,8 @@
 ---
-layout: projects_showcase
 title: Projects
+layout: page
 display_title: Featured Toronto Projects
-permalink: /projects/
+permalink: "/projects/"
 nav: true
 ---
 
@@ -14,10 +14,24 @@ We invite people from all backgrounds and skill levels to join us. Whether you'r
 
 [Visit our GitHub](https://github.com/CivicTechTO)
 
-
 [See Civic Tech Resources](/resources/)
 
+## Projects
 
----
+### 01. Hacknight Projects
 
-<!-- the remainder of the page is defined by the layout _layouts/projects_showcase.html -->
+{% assign breakout_projects = site.data.projects | where: 'breakout', 'TRUE' | sort: 'last_active' | reverse %}
+<div class="grid-1">
+{% for project in breakout_projects %}
+    {% include project_item.html project=project %}
+{% endfor %}
+</div>
+
+### 02. Other Local Projects
+
+{% assign breakout_projects = site.data.projects | where_exp:'project', 'project.breakout == TRUE' | sort: 'last_active' | reverse %}
+<div class="grid-1">
+{% for project in breakout_projects %}
+    {% include project_item.html project=project %}
+{% endfor %}
+</div>

@@ -1,8 +1,10 @@
 ---
+title: 'Hacknight #80: Tris Lumley'
 layout: post
-title:  "Hacknight #80: Tris Lumley"
-date:  2017-02-22 12:00:00 -0400
-categories: hacknights update
+date: '2017-02-22 19:00:00'
+categories:
+- hacknights
+- update
 ---
 
 ![](https://mlydg0vejq30.i.optimole.com/w:827/h:620/q:mauto/f:best/https://civictech.ca/wp-content/uploads/2017/02/C5OoaG7UcAANE6_.jpg)

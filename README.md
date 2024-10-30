@@ -56,8 +56,7 @@ Before you start, consider taking a look at the [GitHub Pages documentation](htt
 - `_includes/` - Reusable page snippets (e.g., headers, footers)
 - `assets/` - CSS, JS, and image files
 - `_posts/` - Blog post content in Markdown, currently used for historical hacknight posts
-- `_projects/` - Project-specific content and markdown files, sourced from [airtable](https://airtable.com/appUgBERtcCo6ip7C/shrLwh32JlUEDRDFN/tbl4w4y4QjOPFHjus)
-- `_supporters/` - Content for supporters, derived from the current site
+- `_data/` - data files retrieved by `site.data.FILENAME`, contains supporters and projects list for simplified updates. 
 
 ## Warnings and Pitfalls
 
@@ -76,4 +75,4 @@ Using Jekyll with GitHub Pages offers simplicity but comes with certain setup co
 
 ## Contributing
 
-This repository is open to contributions! Please submit a pull request if you’d like to propose improvements, report issues, or add new features to support this evaluation.
+This repository is currently under review, pending decision on next steps.
