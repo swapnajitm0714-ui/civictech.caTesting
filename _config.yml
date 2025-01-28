@@ -12,7 +12,6 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-
 title: Civic Tech Toronto
 author:
   name: Civic Tech Toronto
@@ -27,25 +26,66 @@ baseurl: "" # the subpath of your site, e.g. /blog
 # twitter_username: jekyllrb
 github_username: civictechto
 
-
 # Build settings
 # theme: minima # replace with remote_theme
-remote_theme: jekyll/minima
+# remote_theme: jekyll/minima
 
 ## Theme Configuation
-minima:
-  skin: auto
-  social_links: # refer to https://github.com/jekyll/minima/tree/master?tab=readme-ov-file#social-networks
-    - { platform: github,  user_url: "https://github.com/civictechto" }
-    - { platform: youtube, user_url: "https://www.youtube.com/@CivicTechTO/videos" }
-    - { platform: linkedin, user_url: "https://www.linkedin.com/company/civictechto/" }
+# minima:
+#   skin: auto
+#   social_links: # refer to https://github.com/jekyll/minima/tree/master?tab=readme-ov-file#social-networks
+#     - { platform: github, user_url: "https://github.com/civictechto" }
+#     - {
+#         platform: youtube,
+#         user_url: "https://www.youtube.com/@CivicTechTO/videos",
+#       }
+#     - {
+#         platform: linkedin,
+#         user_url: "https://www.linkedin.com/company/civictechto/",
+#       }
+
+# Collections
+collections:
+  hacknights:
+    output: true
+    sort_by: date
+    source: archives/hacknights
+  projects:
+    output: true
+    source: archives/projects
+  people:
+    output: false
+    source: archives/people
+  venues:
+    output: false
+    source: archives/venues
+  organizations:
+    output: false
+    source: archives/organizations
+
+defaults:
+  - scope:
+      path: "archives/hacknights"
+      type: "posts"
+    values:
+      layout: "default"
+      category: "hacknight"
+      published: true
+  - scope:
+      type: "posts"
+    values:
+      layout: "post"
 
 # Plugins
 
 plugins:
-  - jekyll-feed
-  - jekyll-admin 
-  
+  # - jekyll-feed
+  # - jekyll-admin
+
+# Settings
+timezone: America/Toronto
+# use_html_extension: false
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
