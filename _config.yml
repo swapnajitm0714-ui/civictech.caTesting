@@ -1,107 +1,127 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-
 title: Civic Tech Toronto
 author:
   name: Civic Tech Toronto
   email: hi@civictech.ca
 
-description: >- # this means to ignore newlines until "baseurl:"
+description: >-
   Civic Tech Toronto is a vibrant and diverse community of Torontonians engaged 
   in understanding and creating solutions for civic challenges through technology, 
   design, and other innovative means.
-baseurl: "" # the subpath of your site, e.g. /blog
-# url: "" # the base hostname & protocol for your site, e.g. http://example.com
-# twitter_username: jekyllrb
+baseurl: ""
+# url: "" # the base hostname e.g. http://example.com
 github_username: civictechto
 
-# Build settings
-# theme: minima # replace with remote_theme
-# remote_theme: jekyll/minima
+timezone: America/Toronto
 
-## Theme Configuation
-# minima:
-#   skin: auto
-#   social_links: # refer to https://github.com/jekyll/minima/tree/master?tab=readme-ov-file#social-networks
-#     - { platform: github, user_url: "https://github.com/civictechto" }
-#     - {
-#         platform: youtube,
-#         user_url: "https://www.youtube.com/@CivicTechTO/videos",
-#       }
-#     - {
-#         platform: linkedin,
-#         user_url: "https://www.linkedin.com/company/civictechto/",
-#       }
+# Includes & Excludes
+
+exclude:
+  - .obsidian
+  - /**/.obsidian
+  - .gitignore
+  - /**/.gitignore
+  - .gitmodules
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - /**/README.md
+  - LICENSE
+  - /**/LICENSE
+  - /**/templates
+  - .csv
 
 # Collections
 collections:
+  pages:
+    output: true
+    permalink: /:path/
+  entities:
+    output: true
+    permalink: /:collection/:path/
+    relative_directory: "_submod/resources/entities"
   hacknights:
     output: true
     sort_by: date
-    source: archives/hacknights
+    permalink: /hacknights/:path/
+    relative_directory: "_submod/archives/hacknights"
+  speakers:
+    output: true
+    permalink: /:collection/:path/
+    relative_directory: "_submod/archives/speakers"
+  organizations:
+    output: true
+    permalink: /:collection/:path/
+    relative_directory: "_submod/archives/organizations"
   projects:
     output: true
-    source: archives/projects
+    permalink: /projects/:path/
+    relative_directory: "_submod/archives/projects"
   people:
-    output: false
-    source: archives/people
+    output: true
+    permalink: /:collection/:path/
+    relative_directory: "_submod/archives/people"
   venues:
-    output: false
-    source: archives/venues
-  organizations:
-    output: false
-    source: archives/organizations
+    output: true
+    permalink: /:collection/:path/
+    relative_directory: "_submod/archives/venues"
 
 defaults:
   - scope:
-      path: "archives/hacknights"
-      type: "posts"
+      path: ""
+      type: pages
     values:
-      layout: "default"
-      category: "hacknight"
-      published: true
+      layout: base
   - scope:
-      type: "posts"
+      path: "speakers"
+      type: posts
     values:
-      layout: "post"
+      layout: base
+      category: speakers
+  - scope:
+      path: "organizations"
+      type: posts
+    values:
+      layout: base
+      category: organizations
+  - scope:
+      path: "projects"
+      type: posts
+    values:
+      layout: base
+      category: projects
+  - scope:
+      path: "people"
+      type: posts
+    values:
+      layout: base
+      category: people
+  - scope:
+      path: "venues"
+      type: posts
+    values:
+      layout: base
+      category: venues
+  - scope:
+      path: "entities"
+      type: posts
+    values:
+      layout: base
+      category: entities
+  - scope:
+      path: "hacknights"
+      type: posts
+    values:
+      layout: base
+      category: hacknights
 
 # Plugins
 
 plugins:
   # - jekyll-feed
   # - jekyll-admin
+  # - jekyll-last-modified-at
 
-# Settings
-timezone: America/Toronto
-# use_html_extension: false
-
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+use_html_extension: false
+# open_external_links_in_new_tab: false
+# permalink: pretty
+# relative_permalinks: false
