@@ -1,3 +1,6 @@
 [submodule "archives"]
 	path = archives
 	url = https://github.com/CivicTechTO/archives
+[submodule "resources"]
+	path = resources
+	url = https://github.com/CivicTechTO/resources
