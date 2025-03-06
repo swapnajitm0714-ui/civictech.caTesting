@@ -62,7 +62,7 @@ unique_topics=unique_topics
 
 <tr class="filterRow" data-topics="{{ topics_string }}">
 <td>{{ event.date | date: "%B %d, %Y" }}</td>
-<td>{{ event.title }}</td>
+<td><a href="{{ event.url }}" >{{ event.title }}</a></td>
 <td>{{ event.speakers | join: ", " }}</td>
 <td>{{ topics_string }}</td>
 <td>
