@@ -4,58 +4,83 @@ layout: page
 permalink: "/projects/"
 ---
 
-{% assign breakout_projects = site.projects | where: "fromBreakout", true %}
-{% assign non_breakout_projects = site.projects | where: "fromBreakout", false %}
+{% assign all_projects = site.projects %}
 
-{% assign grouped_breakout_projects = breakout_projects | group_by: "status_community" | sort: "name" %}
-{% assign grouped_non_breakout_projects = non_breakout_projects | group_by: "status_community" | sort: "name" %}
+<!-- Extract unique topics -->
 
-  <section>
-    <h2>Breakout Projects</h2>
-    {% if grouped_breakout_projects.size > 0 %}
-      {% for group in grouped_breakout_projects %}
-        <h3>{{ group.name | capitalize }}</h3>
-        <ul>
-          {% for project in group.items %}
-            <li>
-              <a href="{{ project.url }}">{{ project.name }}</a>
-              {% if project.tags %}
-                <small>
-                  {% for tag in project.tags %}
-                    <span class="tag">{{ tag | replace: "type/", "" | replace: "topic/", "" }}</span>
-                  {% endfor %}
-                </small>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% endfor %}
-    {% else %}
-      <p>No breakout projects found.</p>
-    {% endif %}
-  </section>
+{% assign topic_tags = "" | split: "," %}
+{% for project in all_projects %}
+{% for tag in project.tags %}
+{% if tag contains "topic/" %}
+{% assign topic_name = tag | replace: "topic/", "" | replace: "-", " " | capitalize %}
+{% assign topic_tags = topic_tags | push: topic_name %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% assign unique_topics = topic_tags | uniq | sort %}
 
-  <section>
-    <h2>Regional Projects</h2>
-    {% if grouped_non_breakout_projects.size > 0 %}
-      {% for group in grouped_non_breakout_projects %}
-        <h3>{{ group.name | capitalize }}</h3>
-        <ul>
-          {% for project in group.items %}
-            <li>
-              <a href="{{ project.url }}">{{ project.name }}</a>
-              {% if project.tags %}
-                <small>
-                  {% for tag in project.tags %}
-                    <span class="tag">{{ tag | replace: "type/", "" | replace: "topic/", "" }}</span>
-                  {% endfor %}
-                </small>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% endfor %}
-    {% else %}
-      <p>No general projects found.</p>
-    {% endif %}
-  </section>
+<!-- Include the reusable filtering component -->
+
+{% include filter.html
+type="projects"
+search_id="searchProjects"
+table_id="projectsTable"
+filter_id="projectFilters"
+checkbox_class="projectCheckbox"
+unique_topics=unique_topics
+%}
+
+<!-- Organizing Projects by Status -->
+
+{% assign status_groups = all_projects | group_by: "status_community" %}
+
+<!-- Table of Projects -->
+<table id="projectsTable" class="striped">
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Topics</th>
+<th>Website</th>
+<th>GitHub</th>
+</tr>
+</thead>
+
+{% for status_group in status_groups %}
+
+<tbody>
+<tr>
+<th scope="rowgroup" colspan="5"><strong>Status: {{ status_group.name | capitalize }}</strong></th>
+</tr>
+
+{% for project in status_group.items %}
+{% assign formatted_topics = "" | split: "," %}
+{% for tag in project.tags %}
+{% if tag contains "topic/" %}
+{% assign topic_name = tag | replace: "topic/", "" | replace: "-", " " | capitalize %}
+{% assign formatted_topics = formatted_topics | push: topic_name %}
+{% endif %}
+{% endfor %}
+{% assign topics_string = formatted_topics | join: ", " %}
+
+<tr class="filterRow" data-topics="{{ topics_string }}">
+<td><a href="{{ project.url}}">{{ project.name }}</a></td>
+<td>{{ project.description | default: "No description available." }}</td>
+<td>{{ topics_string }}</td>
+<td>
+{% if project.website %}
+<a href="{{ project.website }}" target="_blank" rel="noopener">Website</a>
+{% else %}
+{% endif %}
+</td>
+<td>
+{% if project.gitrepo %}
+<a href="{{ project.gitrepo }}" target="_blank" rel="noopener">GitHub</a>
+{% else %}
+{% endif %}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+{% endfor %}
+</table>

@@ -29,7 +29,7 @@ layout: home
   <h2>Who's Invited</h2>
   <p>We invite people from all backgrounds and skill levels to join us. Whether you’re a tech expert, a curious beginner, or passionate about civic issues, your presence and contribution are valued.</p>
   <p>Civic Tech Toronto is committed to fostering a safe, inclusive, and enjoyable environment for collaboration. We believe in the power of diverse perspectives and a human-centred approach in tackling civic issues, leading to remarkable outcomes.</p>
-  <button class="secondary">Code of Conduct</button>
+  <a href="/code-of-conduct" class="secondary">Code of Conduct</a>
 </section>
 
 <section>
@@ -70,8 +70,9 @@ layout: home
           7:50 pm - Attendees collaborate on projects
         </figcaption>
       </figure>
-    </div>
   </article>
+</div>
+
 </section>
 
 <section>
@@ -81,10 +82,18 @@ Some of our past hacknight speakers
 </hgroup>
 
 <div class="">
-  {% for speaker in site.people limit:18 %}
+  {% assign featured_speakers = site.people | where_exp: "person", "person.tags contains 'is/featured'" %}
+  
+  {% for speaker in featured_speakers limit:9 %}
     <hgroup>
-    <h4>{{ speaker.name }}</h4>
-    <p>{{ speaker.organization }}</p>
+      <h4>{{ speaker.name }}</h4>
+      <p>
+        {% if speaker.organization %}
+          {{ speaker.organization | join: ", " }}
+        {% else %}
+          Independent
+        {% endif %}
+      </p>
     </hgroup>
   {% endfor %}
 </div>
@@ -95,4 +104,5 @@ Some of our past hacknight speakers
 
 <section>
 <h1>Our supporters</h1>
+<p> coming soon</p>
 </section>
