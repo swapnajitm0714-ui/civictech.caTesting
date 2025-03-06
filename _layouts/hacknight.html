@@ -1,0 +1,40 @@
+---
+layout: base
+---
+<main class="container">
+<article>
+  <header>
+    <hgroup>
+      <p>Hacknight #{{page.number}}</p>
+      <h1>{{page.topic}}</h1>
+      <p>with {{page.speakers}}</p>
+    </hgroup>
+  </header>
+  <p>{{page.image}}</p>
+  
+  <p>{{page.description}}</p>
+
+  <section>
+  <h2>Speakers</h2>
+  {{page.speakers}}
+  </section>
+  
+  {% if page.youtubeID %}
+  <section>
+    <h2>Recording</h2>
+    {% include embed_youtube.html youtubeID=page.youtubeID %}
+  </section>
+  {% endif %}
+
+  {{content}}
+
+  <footer>
+    <h2>Details</h2>
+    {% if page.eventUrl %}
+    <p><a href="{{page.eventUrl}}" target="_blank">Event Page</a></p>
+    {% endif %}
+    <p>{{page.date}}</p>
+    <p>{{page.venue}}</p>
+  </footer>
+</article>
+</main>

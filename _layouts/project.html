@@ -1,0 +1,67 @@
+---
+layout: base
+---
+<main class="container">
+<article>
+  <header>
+    <h1>{{ page.name }}</h1>
+    {% if page.website %}
+      <p><a href="{{ page.website }}" target="_blank" rel="noopener">Visit Project Website</a></p>
+    {% endif %}
+  </header>
+
+  {% if page.description %}
+    <p>{{ page.description }}</p>
+  {% endif %}
+
+  <section>
+    <h2>Status</h2>
+    <ul>
+      <li><strong>Community Status:</strong> {{ page.status_community | default: "Unknown" }}</li>
+      <li><strong>Archive Status:</strong> {{ page.status_archive | default: "Unknown" }}</li>
+      <li><strong>Launched:</strong> {{ page.launched | default: "No" | capitalize }}</li>
+      <li><strong>Active Since:</strong> {{ page.dateActiveFirst | date: "%B %d, %Y" }}</li>
+    </ul>
+  </section>
+
+  {% if page.tags %}
+    <section>
+      <h2>Tags</h2>
+      <p>
+        {% for tag in page.tags %}
+          <span class="tag">{{ tag | replace: "type/", "" | replace: "topic/", "" }}</span>
+        {% endfor %}
+      </p>
+    </section>
+  {% endif %}
+
+  <section>
+    <h2>Project Links</h2>
+    <ul>
+      {% if page.gitrepo %}
+        <li><a href="{{ page.gitrepo }}" target="_blank" rel="noopener">GitHub Repository</a></li>
+      {% endif %}
+      {% if page.slackChannel %}
+        <li><a href="{{ page.slackChannel }}" target="_blank" rel="noopener">Slack Channel</a></li>
+      {% endif %}
+    </ul>
+  </section>
+
+  {% if page.social %}
+    <section>
+      <h2>Social</h2>
+      <ul>
+        {% if page.social.website %}
+          <li><a href="{{ page.social.website }}" target="_blank" rel="noopener">Website</a></li>
+        {% endif %}
+        {% if page.social.email %}
+          <li><a href="mailto:{{ page.social.email }}">Email: {{ page.social.email }}</a></li>
+        {% endif %}
+        {% if page.social.github %}
+          <li><a href="{{ page.social.github }}" target="_blank" rel="noopener">GitHub</a></li>
+        {% endif %}
+      </ul>
+    </section>
+  {% endif %}
+</article>
+</main>

@@ -6,7 +6,6 @@ This repository contains a draft website created with Jekyll for evaluating the 
 
 The goal of this project is to explore the advantages and limitations of using Jekyll with GitHub Pages as a potential alternative to WordPress. The objective is to create a static, secure, and low-maintenance website that is easy to update and contributes to open, accessible web content.
 
-
 ### Theme
 
 This site uses the [Minima theme](https://github.com/jekyll/minima) as a base. Minima is the default theme and provides a clean, simple design and is highly customizable. It offers a flexible starting point for adapting the brand and visual style to a GitHub Pages-friendly Jekyll format.
@@ -30,14 +29,15 @@ Migrating to GitHub Pages offers multiple advantages:
 
 Before you start, consider taking a look at the [GitHub Pages documentation](https://docs.github.com/en/pages)
 
-1. **Clone the Repository**  
+1. **Clone the Repository**
    ```
    git clone https://github.com/CivicTechTO/civictechto.github.io.git
    ```
 2. **Install Jekyll and Bundler**  
    Follow the [Jekyll installation guide](https://jekyllrb.com/docs/installation/) to set up Jekyll and Bundler.
 
-3. **Install Dependencies**  
+3. **Install Dependencies**
+
    ```
    bundle install
    ```
@@ -51,12 +51,13 @@ Before you start, consider taking a look at the [GitHub Pages documentation](htt
    Open your browser and go to `http://localhost:4000` to see the site.
 
 ## Directory Structure
+
 - `_config.yml` - Site configuration settings
 - `_layouts/` - Layout files for different page types
 - `_includes/` - Reusable page snippets (e.g., headers, footers)
 - `assets/` - CSS, JS, and image files
 - `_posts/` - Blog post content in Markdown, currently used for historical hacknight posts
-- `_data/` - data files retrieved by `site.data.FILENAME`, contains supporters and projects list for simplified updates. 
+- `_data/` - data files retrieved by `site.data.FILENAME`, contains supporters and projects list for simplified updates.
 
 ## Warnings and Pitfalls
 
@@ -76,3 +77,11 @@ Using Jekyll with GitHub Pages offers simplicity but comes with certain setup co
 ## Contributing
 
 This repository is currently under review, pending decision on next steps.
+
+---
+
+Submodule Updates
+
+```zsh
+git submodule update --remote --merge
+```

@@ -1,6 +1,8 @@
 ---
 title: "Volunteer with Us"
+layout: page
 permalink: "/volunteer-with-us/"
+publish: false
 ---
 
 # Volunteer with us

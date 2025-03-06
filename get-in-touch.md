@@ -1,5 +1,6 @@
 ---
 title: "Get in Touch"
+layout: page
 permalink: "/get-in-touch/"
 ---
 

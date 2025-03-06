@@ -1,5 +1,6 @@
 ---
 title: "Get Involved"
+layout: page
 permalink: "/get-involved/"
 ---
 

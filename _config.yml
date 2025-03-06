@@ -28,91 +28,62 @@ exclude:
   - LICENSE
   - /**/LICENSE
   - /**/templates
-  - .csv
+  - generate-csv copy.html
+  - generate-csv.html
+  - /**/utilities
+  - /utilities
 
 # Collections
+
+collections_dir: archives
 collections:
-  pages:
-    output: true
-    permalink: /:path/
-  entities:
-    output: true
-    permalink: /:collection/:path/
-    relative_directory: "_submod/resources/entities"
   hacknights:
     output: true
     sort_by: date
-    permalink: /hacknights/:path/
-    relative_directory: "_submod/archives/hacknights"
-  speakers:
-    output: true
     permalink: /:collection/:path/
-    relative_directory: "_submod/archives/speakers"
   organizations:
     output: true
     permalink: /:collection/:path/
-    relative_directory: "_submod/archives/organizations"
-  projects:
-    output: true
-    permalink: /projects/:path/
-    relative_directory: "_submod/archives/projects"
   people:
     output: true
     permalink: /:collection/:path/
-    relative_directory: "_submod/archives/people"
-  venues:
+  projects:
     output: true
     permalink: /:collection/:path/
-    relative_directory: "_submod/archives/venues"
+  resources:
+    output: false
+  venues:
+    output: false
 
 defaults:
   - scope:
       path: ""
-      type: pages
+      type: hacknights
     values:
-      layout: base
+      layout: hacknight
+      category: events
+      sort_by: date
+
   - scope:
-      path: "speakers"
-      type: posts
+      path: ""
+      type: organizations
     values:
-      layout: base
-      category: speakers
+      layout: post
+      category: community
+
   - scope:
-      path: "organizations"
-      type: posts
+      path: ""
+      type: people
     values:
-      layout: base
-      category: organizations
+      layout: post
+      category: team
+
   - scope:
-      path: "projects"
-      type: posts
+      path: ""
+      type: projects
     values:
-      layout: base
+      layout: project
       category: projects
-  - scope:
-      path: "people"
-      type: posts
-    values:
-      layout: base
-      category: people
-  - scope:
-      path: "venues"
-      type: posts
-    values:
-      layout: base
-      category: venues
-  - scope:
-      path: "entities"
-      type: posts
-    values:
-      layout: base
-      category: entities
-  - scope:
-      path: "hacknights"
-      type: posts
-    values:
-      layout: base
-      category: hacknights
 
 # Plugins
 

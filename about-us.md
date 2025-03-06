@@ -1,5 +1,6 @@
 ---
 title: "About Us"
+layout: page
 permalink: "/about-us/"
 ---
 
@@ -21,7 +22,7 @@ Civic Tech TO is an unincorporated organization and completely volunteer-run —
 
 ### Speak at one of our events
 
-If you’re interested in presenting at one of our hacknights, get in touch with us at hi@civictech.ca to set up a chat. We usually book speakers about one month in advance. Take a look at our [Past Hacknights](/updates/) to get an idea of what our previous speakers have talked about.
+If you’re interested in presenting at one of our hacknights, get in touch with us at hi@civictech.ca to set up a chat. We usually book speakers about one month in advance. Take a look at our [Past Hacknights](/hacknights/) to get an idea of what our previous speakers have talked about.
 
 ### Provide a venue
 
