@@ -38,11 +38,8 @@ unique_topics=unique_topics
 <table id="projectsTable" class="striped">
 <thead>
 <tr>
-<th>Name</th>
-<th>Description</th>
-<th>Topics</th>
-<th>Website</th>
-<th>GitHub</th>
+<th>Project</th>
+<th>Links</th>
 </tr>
 </thead>
 
@@ -64,21 +61,14 @@ unique_topics=unique_topics
 {% assign topics_string = formatted_topics | join: ", " %}
 
 <tr class="filterRow" data-topics="{{ topics_string }}">
-<td><a href="{{ project.url}}">{{ project.name }}</a></td>
-<td>{{ project.description | default: "No description available." }}</td>
-<td>{{ topics_string }}</td>
-<td>
-{% if project.website %}
-<a href="{{ project.website }}" target="_blank" rel="noopener">Website</a>
-{% else %}
+<td><a href="{{ project.url}}">{{ project.title }}</a><br/>
+{% if project.excerpt %}
+{{ project.excerpt }}
 {% endif %}
+<small>TOPICS: {{ topics_string }}</small>
 </td>
-<td>
-{% if project.gitrepo %}
-<a href="{{ project.gitrepo }}" target="_blank" rel="noopener">GitHub</a>
-{% else %}
-{% endif %}
-</td>
+<td>{% if project.gitrepo %} <a href="{{ project.gitrepo }}" target="_blank" rel="noopener">GitHub</a>
+{% else %} {% endif %} {% if project.website %} <a href="{{ project.website }}" target="_blank" rel="noopener">Website</a> {% else %} {% endif %} <a role="button" class="outline" href="{{ project.url }}">View</a></td>
 </tr>
 {% endfor %}
 </tbody>

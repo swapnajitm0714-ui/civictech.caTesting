@@ -1,67 +1,105 @@
 ---
 layout: base
 ---
+
+{% comment %} Resolving Obsidian wiki links for hacknights {% endcomment %}
+{% assign resolved_hacknights = "" | split: "" %}
+{% for instance in page.hacknight %}
+{% assign instance_name = instance | remove: '[[' | remove: ']]' %}
+{% assign path = '_hacknights/' | append: instance_name | append: '.md' %}
+{% assign instance_resolved = site.hacknights | where: "relative_path", path | first %}
+{% if instance_resolved %}
+{% assign resolved_hacknights = resolved_hacknights | push: instance_resolved %}
+{% endif %}
+{% endfor %}
 <main class="container">
-<article>
-  <header>
-    <h1>{{ page.name }}</h1>
-    {% if page.website %}
-      <p><a href="{{ page.website }}" target="_blank" rel="noopener">Visit Project Website</a></p>
+  <nav aria-label="breadcrumb"><ul><li><a href="{{ site.baseurl }}/">Home</a></li>
+      <li><a href="{{ site.baseurl }}/projects">Projects</a></li>
+      <li>{{ page.title }}</li>
+    </ul>
+  </nav>
+  <article>
+    <header>
+      <hgroup>
+        <h1>{{ page.title }}</h1>
+        {% if page.excerpt %}
+          <p>{{ page.excerpt }}</p>
+        {% endif %}
+      </hgroup>
+      {% if page.project_website %}
+      <a href="{{ page.project_website }}" target="_blank">Visit Project Website</a>
+      {% endif %}
+    </header>
+    
+    <!-- PITCH -->
+    {% if page.project_pitch %}
+    <section>
+      <h2>Pitch</h2>
+      <p>{{ page.project_pitch }}</p>
+    </section>
     {% endif %}
-  </header>
-
-  {% if page.description %}
-    <p>{{ page.description }}</p>
-  {% endif %}
-
-  <section>
-    <h2>Status</h2>
-    <ul>
-      <li><strong>Community Status:</strong> {{ page.status_community | default: "Unknown" }}</li>
-      <li><strong>Archive Status:</strong> {{ page.status_archive | default: "Unknown" }}</li>
-      <li><strong>Launched:</strong> {{ page.launched | default: "No" | capitalize }}</li>
-      <li><strong>Active Since:</strong> {{ page.dateActiveFirst | date: "%B %d, %Y" }}</li>
-    </ul>
-  </section>
-
-  {% if page.tags %}
+    
+    <!-- DESCRIPTION -->
     <section>
-      <h2>Tags</h2>
-      <p>
-        {% for tag in page.tags %}
-          <span class="tag">{{ tag | replace: "type/", "" | replace: "topic/", "" }}</span>
-        {% endfor %}
-      </p>
+      {{ page.content }}
     </section>
-  {% endif %}
 
-  <section>
-    <h2>Project Links</h2>
-    <ul>
-      {% if page.gitrepo %}
-        <li><a href="{{ page.gitrepo }}" target="_blank" rel="noopener">GitHub Repository</a></li>
-      {% endif %}
-      {% if page.slackChannel %}
-        <li><a href="{{ page.slackChannel }}" target="_blank" rel="noopener">Slack Channel</a></li>
-      {% endif %}
-    </ul>
-  </section>
-
-  {% if page.social %}
+    <!-- LINKS -->
     <section>
-      <h2>Social</h2>
-      <ul>
-        {% if page.social.website %}
-          <li><a href="{{ page.social.website }}" target="_blank" rel="noopener">Website</a></li>
+      <h2>Links</h2>
+        {% if page.project_website %}
+        <a href="{{ page.project_website }}" target="_blank"
+        >Visit Project Website</a>
         {% endif %}
-        {% if page.social.email %}
-          <li><a href="mailto:{{ page.social.email }}">Email: {{ page.social.email }}</a></li>
+      
+        {% if page.project_slack %}
+        <a href="{{ page.project_slack }}" target="_blank"
+        >S</a>
         {% endif %}
-        {% if page.social.github %}
-          <li><a href="{{ page.social.github }}" target="_blank" rel="noopener">GitHub</a></li>
+        {% if page.project_github %}
+        <a  href="{{ page.project_github }}" target="_blank"
+        >GH</a>
         {% endif %}
-      </ul>
+        {% if page.project_email %}
+        <a  href="{{ page.project_email }}" target="_blank"
+        >email</a>
+        {% endif %}
     </section>
+
+    <!-- DEETS -->
+    <aside>
+      <table>
+        <tr><td>Categories</td><td>{% for category in page.categories %} "{{ category }}" {% endfor %}</td></tr>
+        <tr><td>Tags</td><td>{% if page.tags %}{% for tag in page.tags %}<span class="tag">"{{ tag | replace: "type/", "" | replace: "topic/", "" }}" </span>{% endfor %}{% endif %}</td></tr>
+        <tr><td>Since</td><td>{{ page.dateActiveFirst | date: "%B %d, %Y" }}</td></tr>
+      </table>
+    </aside>
+  
+  </article>
+
+  {% if resolved_hacknights.size > 0 %}
+  <section>
+    <h2>Related Hacknights</h2>
+    <div class="grid">
+      {% for instance in resolved_hacknights %}
+      <article>
+        <header class="grid">
+          <hgroup>
+            <h3><small>Hacknight # {{ instance.number }}</small></h3>
+            <p>{{ instance.topic }}</p>
+          </hgroup>
+        </header>
+        {% include embed_youtube.html youtubeID=instance.youtubeID %}
+        <p>{{ instance.date | date: "%B %d, %Y" }}</p>
+        <footer>
+          <div style="text-align: right;">
+            <a role="button" class="secondary outline" href="{{instance.url}}">view hacknight</a>
+          </div>
+        </footer>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
   {% endif %}
-</article>
+
 </main>

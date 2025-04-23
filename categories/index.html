@@ -1,0 +1,11 @@
+---
+layout: page
+title: Categories
+---
+
+<h1>All Categories</h1>
+<ul>
+  {% for cat in site.data.categories %}
+    <li><a href="{{ '/categories/' | append: cat | append: '/' }}">{{ cat }}</a></li>
+  {% endfor %}
+</ul>

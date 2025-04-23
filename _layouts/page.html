@@ -1,14 +1,21 @@
 ---
 layout: base
 ---
+
+
 <main class="container">
+  <nav aria-label="breadcrumb">
+    <ul>
+      <li><a href="{{ site.baseurl }}/">Home</a></li>
+      <li>{{ page.title }}</li>
+    </ul>
+  </nav>
 <article>
   <header>
     <hgroup>
     <h1>{{ page.display_title | default: page.title }}</h1>
     </hgroup>
   </header>
-
   <div>
     {{ content }}
   </div>

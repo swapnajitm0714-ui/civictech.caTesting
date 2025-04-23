@@ -1,0 +1,18 @@
+---
+layout: page
+---
+
+<h1>Tagged with "{{ page.title }}"</h1>
+
+<ul>
+  {% assign tag = page.title %}
+  {% assign collections = "projects,hacknights" | split: "," %}
+
+  {% for coll in collections %}
+    {% for item in site[coll] %}
+      {% if item.tags contains tag %}
+        <li><a href="{{ item.url }}">{{ item.title }}</a> <small>({{ coll }})</small></li>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+</ul>

@@ -1,0 +1,18 @@
+---
+layout: page
+title: Tags
+---
+
+
+<h1>All Tags</h1>
+
+{% for namespace in site.data.tags %}
+  <h2>{{ namespace[0] }}</h2>
+  <ul>
+    {% for tag in namespace[1] %}
+      <li>
+        <a href="/tags/{{ namespace[0] }}/{{ tag }}/">{{ tag }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endfor %}

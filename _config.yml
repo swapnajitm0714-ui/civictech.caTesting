@@ -68,15 +68,14 @@ defaults:
       path: ""
       type: organizations
     values:
-      layout: post
+      layout: people
       category: community
 
   - scope:
       path: ""
       type: people
     values:
-      layout: post
-      category: team
+      layout: people
 
   - scope:
       path: ""

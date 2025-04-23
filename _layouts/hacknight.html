@@ -1,40 +1,96 @@
 ---
 layout: base
 ---
-<main class="container">
-<article>
-  <header>
-    <hgroup>
-      <p>Hacknight #{{page.number}}</p>
-      <h1>{{page.topic}}</h1>
-      <p>with {{page.speakers}}</p>
-    </hgroup>
-  </header>
-  <p>{{page.image}}</p>
-  
-  <p>{{page.description}}</p>
 
-  <section>
-  <h2>Speakers</h2>
-  {{page.speakers}}
-  </section>
-  
-  {% if page.youtubeID %}
-  <section>
-    <h2>Recording</h2>
-    {% include embed_youtube.html youtubeID=page.youtubeID %}
-  </section>
+{% comment %} Resolving Speakers {% endcomment %}
+{% assign resolved_speakers = "" | split: "" %}
+{% for speaker in page.speakers %}
+  {% assign name = speaker | remove: '[[' | remove: ']]' %}
+  {% assign path = '_people/' | append: name | append: '.md' %}
+  {% assign person = site.people | where: "relative_path", path | first %}
+  {% if person %}
+    {% assign resolved_speakers = resolved_speakers | push: person %}
   {% endif %}
+{% endfor %}
 
-  {{content}}
+{% comment %} Resolving Venues {% endcomment %}
+{% assign resolved_venue = "" | split: "" %}
+{% for venue in page.venue %}
+  {% assign name = venue | remove: '[[' | remove: ']]' %}
+  {% assign path = '_venues/' | append: name | append: '.md' %}
+  {% assign loc = site.venues | where: "relative_path", path | first %}
+  {% if loc %}
+    {% assign resolved_venue = resolved_venue | push: loc %}
+  {% endif %}
+{% endfor %}
 
-  <footer>
-    <h2>Details</h2>
-    {% if page.eventUrl %}
-    <p><a href="{{page.eventUrl}}" target="_blank">Event Page</a></p>
+
+<main class="container">
+  <article>
+    <header>
+      <hgroup>
+        <p>Hacknight #{{ page.number }}</p>
+        <h1>{{ page.topic }}</h1>
+        {% if resolved_speakers.size > 0 %}
+        <p>with
+          {% for speaker in resolved_speakers %}
+            {% if forloop.first and forloop.length == 1 %}
+              {{ speaker.title }}
+            {% elsif forloop.length == 2 and forloop.first %}
+              {{ speaker.title }}
+            {% elsif forloop.length == 2 and forloop.last %}
+              and {{ speaker.title }}
+            {% elsif forloop.length > 2 and forloop.first %}
+              {{ speaker.title }},
+            {% elsif forloop.length > 2 and forloop.last %}
+              and {{ speaker.title }}
+            {% elsif forloop.length > 2 %}
+              {{ speaker.title }},
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        </p>
+      </hgroup>
+    </header>
+
+    {% if page.youtubeID %}
+      <section>
+        <h2>Recording</h2>
+        {% include embed_youtube.html youtubeID=page.youtubeID %}
+      </section>
     {% endif %}
-    <p>{{page.date}}</p>
-    <p>{{page.venue}}</p>
-  </footer>
-</article>
+
+    <p>{{ page.image }}</p>
+    <p>{{ page.description }}</p>
+
+
+    {% if resolved_speakers.size > 0 %}
+    <section>
+      <h2>Speakers</h2>
+      {% for speaker in resolved_speakers %}
+        <a href="{{ speaker.url }}">{{ speaker.title }}</a>
+        <p>{{ speaker.description }}</p>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+
+    {{ content }}
+
+    <footer>
+      <h2>Details</h2>
+      {% if page.eventUrl %}
+        <p>
+          <a href="{{page.eventUrl}}" target="_blank">Event Page</a>
+        </p>
+      {% endif %}
+      <p>{{ page.date }}</p>
+
+      {% if resolved_venue.size > 0 %}
+        {% for venue in resolved_venue %}
+        <p>{{ venue.title }}</p>
+        {% endfor %}
+      {% endif %}
+    </footer>
+  </article>
 </main>

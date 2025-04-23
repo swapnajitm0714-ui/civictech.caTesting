@@ -16,7 +16,7 @@ permalink: "/speakers/"
     {% for speaker in speakers %}
       <tr>
         <td>
-        <a href="{{ speaker.url }}">{{ speaker.name }}</a>
+        <a href="{{ speaker.url }}">{{ speaker.title }}</a>
         </td>
         <td>
           {% if speaker.project %}
