@@ -1,6 +1,6 @@
 ---
 title: "Resources"
-layout: page-wide
+layout: page
 permalink: "/resources/"
 ---
 
@@ -65,12 +65,8 @@ unique_topics=unique_topics
 <table id="resourcesTable" class="striped">
 <thead>
 <tr>
-<th>Category</th>
-<th>Subcategory</th>
-<th>Title</th>
-<th>Description</th>
-<th>Topics</th>
-<th>Website</th>
+<th>Resource</th>
+<th>Url</th>
 </tr>
 </thead>
 
@@ -99,11 +95,13 @@ unique_topics=unique_topics
 {% assign topics_string = formatted_topics | join: ", " %}
 
 <tr class="filterRow" data-topics="{{ topics_string }}">
-<td>{{ category | replace: "-", " " | capitalize }}</td>
-<td>{{ sub_category | replace: "-", " " | capitalize }}</td>
-<td>{{ resource.title }}</td>
-<td>{{ resource.description | default: "" }}</td>
-<td>{{ topics_string }}</td>
+<td>
+  <small>{{ category | replace: "-", " " | capitalize }} > {{ sub_category | replace: "-", " " | capitalize }}</small><br/>
+  <strong>{{ resource.title }}</strong> – {{ resource.description | default: "" }}<br/>
+  {% if topics_string %}
+  <small>Topics: {{ topics_string }}</small>
+  {% endif %}
+  </td>
 <td>
 {% if resource.website %}
 <a href="{{ resource.website }}" target="_blank" rel="noopener">{{ resource.website }}</a>
@@ -130,11 +128,13 @@ unique_topics=unique_topics
 {% assign topics_string = formatted_topics | join: ", " %}
 
 <tr class="filterRow" data-topics="{{ topics_string }}">
-<td>{{ category | replace: "-", " " | capitalize }}</td>
-<td>N/A</td>
-<td>{{ resource.title }}</td>
-<td>{{ resource.description | default: "" }}</td>
-<td>{{ topics_string }}</td>
+<td>
+  <small>{{ category | replace: "-", " " | capitalize }}</small><br/>
+  <strong>{{ resource.title }}</strong> – {{ resource.description | default: "" }}<br/>
+  {% if topics_string %}
+  <small>Topics: {{ topics_string }}</small>
+  {% endif %}
+</td>
 <td>
 {% if resource.website %}
 <a href="{{ resource.website }}" target="_blank" rel="noopener">{{ resource.website }}</a>

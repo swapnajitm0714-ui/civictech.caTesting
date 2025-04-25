@@ -1,6 +1,6 @@
 ---
 title: "Hacknights"
-layout: page-wide
+layout: page
 permalink: "/hacknights/"
 ---
 
@@ -35,11 +35,8 @@ unique_topics=unique_topics
 <table id="hacknightsTable" class="striped">
 <thead>
 <tr>
-<th>Date</th>
-<th>Title</th>
-<th>Speakers</th>
-<th>Topics</th>
-<th>Event Link</th>
+<th>Hacknight</th>
+<th>Links</th>
 </tr>
 </thead>
 
@@ -58,19 +55,33 @@ unique_topics=unique_topics
 {% assign formatted_topics = formatted_topics | push: topic_name %}
 {% endif %}
 {% endfor %}
+
+{% assign speakers_text_array = "" | split: "" %}
+{% for speaker in event.speakers %}
+{% assign speaker_string = speaker | remove: '[[' | remove: ']]' %}
+{% assign speakers_text_array = speakers_text_array | push: speaker_string %}
+{% endfor %}
+
 {% assign topics_string = formatted_topics | join: ", " %}
 
 <tr class="filterRow" data-topics="{{ topics_string }}">
-<td>{{ event.date | date: "%B %d, %Y" }}</td>
-<td><a href="{{ event.url }}" >{{ event.title }}</a></td>
-<td>{{ event.speakers | join: ", " }}</td>
-<td>{{ topics_string }}</td>
 <td>
+  <small>{{ event.date | date: "%B %d, %Y" }}</small><br/>
+  <a href="{{ event.url }}" >{{ event.title }}</a><br/>
+  {% if speakers_text_array.size > 0 %}
+    <p>with {{ speakers_text_array | join: ", " }}</p>
+  {% endif %}
+  {% if topics_string.size > 0 %}
+    <small>Topics: {{ topics_string }}</small>
+  {% endif %}
+</td>
+<td>
+<div role="group">
 {% if event.eventUrl %}
-<a href="{{ event.eventUrl }}" target="_blank" rel="noopener">Meetup Link</a>
-{% else %}
-N/A
+<a role="button" class="outline" href="{{ event.eventUrl }}" target="_blank" rel="noopener">Event&nbsp;Link</a>
 {% endif %}
+<a role="button" href="{{ event.url }}" target="_blank" rel="noopener">View</a>
+</div>
 </td>
 </tr>
 {% endfor %}

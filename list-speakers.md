@@ -1,14 +1,14 @@
 ---
-title: "Speakers"
+title: "People"
 layout: page
-permalink: "/speakers/"
+permalink: "/people/"
 ---
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Hacknights</th>
+      <th>Organizations</th>
     </tr>
   </thead>
   <tbody>
@@ -19,12 +19,12 @@ permalink: "/speakers/"
         <a href="{{ speaker.url }}">{{ speaker.title }}</a>
         </td>
         <td>
-          {% if speaker.project %}
-            {% for proj in speaker.project %}
+          {% if speaker.organization %}
+            {% for proj in speaker.organization %}
               {{ proj }}{% unless forloop.last %}, {% endunless %}
             {% endfor %}
           {% else %}
-            N/A
+            –
           {% endif %}
         </td>
       </tr>

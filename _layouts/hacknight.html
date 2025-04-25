@@ -77,6 +77,75 @@ layout: base
 
     {{ content }}
 
+
+
+
+    {% assign current_slug = page.relative_path | split: '/' | last | remove: '.md' %}
+    {% assign current_wikilink = '[[' | append: current_slug | append: ']]' %}
+    
+    {%- assign backlinks = "" | split: "" -%}
+    
+    {%- assign collections_to_check = 
+      site.projects
+      -%}
+      
+      {%- assign fields_to_check = "hacknight" | split: "," -%}
+      
+      
+      {%- for doc in collections_to_check -%}
+      {%- assign match_found = false -%}
+      {%- for field in fields_to_check -%}
+      {%- assign values = doc[field] -%}
+      {%- if values -%}
+      {%- assign values_str = values | join: '' -%}
+      {%- if values_str != values -%}
+      {%- for item in values -%}
+      {%- if item == current_wikilink or item contains current_wikilink -%}
+      {%- assign match_found = true -%}
+      {%- break -%}
+      {%- endif -%}
+      {%- endfor -%}
+      {%- else -%}
+      {%- if values == current_wikilink or values contains current_wikilink -%}
+      {%- assign match_found = true -%}
+      {%- endif -%}
+      {%- endif -%}
+      {%- endif -%}
+      {%- if match_found -%}
+      {%- assign backlinks = backlinks | push: doc -%}
+      {%- break -%}
+      {%- endif -%}
+      {%- endfor -%}
+      {%- endfor -%}
+      
+      
+      {% if backlinks.size > 0 %}
+      <section>
+        <h2>Mentioned In</h2>
+    
+        {% assign groups = backlinks | group_by: "collection" %}
+    
+        {% for group in groups %}
+          {% assign label = group.name | capitalize %}
+          <h3>{{ label }}</h3>
+          <ul>
+            {% for doc in group.items %}
+              <li>
+                <a href="{{ doc.url }}">{{ doc.title }}</a>
+                {% if doc.date %}
+                  <span> ({{ doc.date | date: "%Y-%m-%d" }})</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </section>
+    {% endif %}
+  
+  
+
+
+
     <footer>
       <h2>Details</h2>
       {% if page.eventUrl %}

@@ -4,6 +4,44 @@ layout: page
 permalink: "/projects/"
 ---
 
+<!-- FEATURED PROJECTS -->
+
+<section>
+<header>
+<h2>Current Projects</h2>
+</header>
+<p>These are some of are current community projects.</p>
+
+<div style="
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+">
+{% for project in site.projects %}
+  {% if project.feature == true %}
+  <article>
+    <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
+    <p>{{ project.excerpt }}</p>
+    <div role="group">
+      {% if project.project_website %}
+      <a role="button" class="outline" href="{{ project.project_website }}" target="_blank">Website</a>
+      {% endif %}
+      <a role="button" href="{{ project.url }}">View</a>
+    </div>
+  </article>
+  {% endif %}
+{% endfor %}
+</div>
+</section>
+
+
+<!-- ALL PROJECTS -->
+
+<section>
+<header>
+<h2>All Projects</h2>
+</header>
+
 {% assign all_projects = site.projects %}
 
 <!-- Extract unique topics -->
@@ -18,6 +56,7 @@ permalink: "/projects/"
 {% endfor %}
 {% endfor %}
 {% assign unique_topics = topic_tags | uniq | sort %}
+
 
 <!-- Include the reusable filtering component -->
 
@@ -61,16 +100,21 @@ unique_topics=unique_topics
 {% assign topics_string = formatted_topics | join: ", " %}
 
 <tr class="filterRow" data-topics="{{ topics_string }}">
-<td><a href="{{ project.url}}">{{ project.title }}</a><br/>
+<td><a href="{{ project.url }}">{{ project.title }}</a><br/>
 {% if project.excerpt %}
 {{ project.excerpt }}
 {% endif %}
-<small>TOPICS: {{ topics_string }}</small>
+<small>Topics: {{ topics_string }}</small>
 </td>
-<td>{% if project.gitrepo %} <a href="{{ project.gitrepo }}" target="_blank" rel="noopener">GitHub</a>
-{% else %} {% endif %} {% if project.website %} <a href="{{ project.website }}" target="_blank" rel="noopener">Website</a> {% else %} {% endif %} <a role="button" class="outline" href="{{ project.url }}">View</a></td>
+<td>
+<div role="group">
+{% if project.website %} <a role="button" class="outline" href="{{ project.website }}" target="_blank" rel="noopener">Website</a> {% else %} {% endif %} <a role="button"  href="{{ project.url }}">View</a>
+</div>
+</td>
 </tr>
 {% endfor %}
 </tbody>
 {% endfor %}
 </table>
+
+</section>
