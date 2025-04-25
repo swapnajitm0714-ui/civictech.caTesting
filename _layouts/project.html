@@ -12,6 +12,18 @@ layout: base
 {% assign resolved_hacknights = resolved_hacknights | push: instance_resolved %}
 {% endif %}
 {% endfor %}
+
+{% comment %} Resolving Obsidian wiki links for people {% endcomment %}
+{% assign resolved_people = "" | split: "" %}
+{% for instance in page.team %}
+{% assign instance_name = instance | remove: '[[' | remove: ']]' %}
+{% assign path = '_people/' | append: instance_name | append: '.md' %}
+{% assign instance_resolved = site.people | where: "relative_path", path | first %}
+{% if instance_resolved %}
+{% assign resolved_people = resolved_people | push: instance_resolved %}
+{% endif %}
+{% endfor %}
+
 <main class="container">
   <nav aria-label="breadcrumb"><ul><li><a href="{{ site.baseurl }}/">Home</a></li>
       <li><a href="{{ site.baseurl }}/projects">Projects</a></li>
@@ -43,6 +55,18 @@ layout: base
     <section>
       {{ page.content }}
     </section>
+
+    <!-- PEOPLE -->
+    {% if resolved_people.size > 0 %}
+    <section>
+      <h2>People</h2>
+      <ul>
+        {% for person in resolved_people %}
+        <li><a href="{{ person.url }}">{{ person.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
 
     <!-- LINKS -->
     <section>

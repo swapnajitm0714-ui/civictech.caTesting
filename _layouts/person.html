@@ -1,0 +1,203 @@
+---
+layout: base
+---
+
+<main class="container">
+  <nav aria-label="breadcrumb">
+    <ul>
+      <li><a href="{{ site.baseurl }}/">Home</a></li>
+      <li><a href="{{ site.baseurl }}/people">People</a></li>
+      <li>{{ page.title }}</li>
+    </ul>
+  </nav>
+  
+  <article>
+    <header>
+      <hgroup>
+        <h1>{{ page.title }}</h1>
+        {% if page.excerpt %}
+        <p>{{ page.excerpt }}</p>
+        {% endif %}
+      </hgroup>
+    </header>
+    
+    <section>
+      <h2>Description</h2>
+      {{ page.description}}
+      <p>{{ page.content }}</p>
+    </section>
+    
+    {% comment %} Resolve wikilinks for organizations {% endcomment %}
+    {% assign resolved_organizations = "" | split: "" %}
+    {% for org in page.organization %}
+    {% assign org_name = org | remove: '[[' | remove: ']]' %}
+    {% assign org_path = '_organizations/' | append: org_name | append: '.md' %}
+    {% assign org_resolved = site.organizations | where: "relative_path", org_path | first %}
+    {% if org_resolved %}
+    {% assign resolved_organizations = resolved_organizations | push: org_resolved %}
+    {% endif %}
+    {% endfor %}
+    
+    {% comment %} Resolve wikilinks for projects {% endcomment %}
+    {% assign resolved_projects = "" | split: "" %}
+    {% for proj in page.project %}
+    {% assign proj_name = proj | remove: '[[' | remove: ']]' %}
+    {% assign proj_path = '_projects/' | append: proj_name | append: '.md' %}
+    {% assign proj_resolved = site.projects | where: "relative_path", proj_path | first %}
+    {% if proj_resolved %}
+    {% assign resolved_projects = resolved_projects | push: proj_resolved %}
+    {% endif %}
+    {% endfor %}
+    
+    <section>
+      {% if resolved_organizations.size > 0 %}
+      <h2>Affiliated Organizations</h2>
+      <ul>
+        {% for org in resolved_organizations %}
+        <li><a href="{{ org.url }}">{{ org.title }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      
+      {% if resolved_projects.size > 0 %}
+      <h2>Projects</h2>
+      <ul>
+        {% for proj in resolved_projects %}
+        <li><a href="{{ proj.url }}">{{ proj.title }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </section>
+    
+    {% if page.social %}
+    <section>
+      <h2>Social Links</h2>
+      <ul>
+        
+        {% if page.social.website %}
+        <li><a href="{{ page.social.website }}" target="_blank">Website</a></li>
+        {% endif %}
+        {% if page.social.wikipedia %}
+        <li><a href="{{ page.social.wikipedia }}" target="_blank">Wikipedia Page</a></li>
+        {% endif %}
+        {% if page.social.linkedin %}
+        <li><a href="{{ page.social.linkedin }}" target="_blank">LinkedIn</a></li>
+        {% endif %}
+        {% if page.social.instagram %}
+        <li><a href="{{ page.social.instagram }}" target="_blank">Instagram</a></li>
+        {% endif %}
+        {% if page.social.twitter %}
+        <li><a href="{{ page.social.twitter }}" target="_blank">Twitter</a></li>
+        {% endif %}
+        {% if page.social.github %}
+        <li><a href="{{ page.social.github }}" target="_blank">GitHub</a></li>
+        {% endif %}
+        {% if page.social.slack %}
+        <li><a href="{{ page.social.slack }}" target="_blank">Slack</a></li>
+        {% endif %}
+        {% if page.social.facebook %}
+        <li><a href="{{ page.social.facebook }}" target="_blank">Facebook</a></li>
+        {% endif %}
+        {% if page.social.youtube %}
+        <li><a href="{{ page.social.youtube }}" target="_blank">YouTube</a></li>
+        {% endif %}
+        {% if page.social.twitch %}
+        <li><a href="{{ page.social.twitch }}" target="_blank">Twitch</a></li>
+        {% endif %}
+        {% if page.social.discord %}
+        <li><a href="{{ page.social.discord }}" target="_blank">Discord</a></li>
+        {% endif %}
+        {% if page.social.patreon %}
+        <li><a href="{{ page.social.patreon }}" target="_blank">Patreon</a></li>
+        {% endif %}
+        {% if page.social.reddit %}
+        <li><a href="{{ page.social.reddit }}" target="_blank">Reddit</a></li>
+        {% endif %}
+        {% if page.social.snapchat %}
+        <li><a href="{{ page.social.snapchat }}" target="_blank">Snapchat</a></li>
+        {% endif %}
+        {% if page.social.tumblr %}
+        <li><a href="{{ page.social.tumblr }}" target="_blank">Tumblr</a></li>
+        {% endif %}
+        {% if page.social.medium %}
+        <li><a href="{{ page.social.medium }}" target="_blank">Medium</a></li>
+        {% endif %}
+        {% if page.social.tiktok %}
+        <li><a href="{{ page.social.tiktok }}" target="_blank">TikTok</a></li>
+        {% endif %}
+      </ul>
+    </section>
+    {% endif %}
+    
+    
+    
+    
+    {% assign current_slug = page.relative_path | split: '/' | last | remove: '.md' %}
+    {% assign current_wikilink = '[[' | append: current_slug | append: ']]' %}
+    
+    {%- assign backlinks = "" | split: "" -%}
+    
+    {%- assign collections_to_check = 
+      site.hacknights
+      | concat: site.projects
+      | concat: site.organizations 
+      -%}
+      
+      {%- assign fields_to_check = "team,speakers" | split: "," -%}
+      
+      
+      {%- for doc in collections_to_check -%}
+      {%- assign match_found = false -%}
+      {%- for field in fields_to_check -%}
+      {%- assign values = doc[field] -%}
+      {%- if values -%}
+      {%- assign values_str = values | join: '' -%}
+      {%- if values_str != values -%}
+      {%- for item in values -%}
+      {%- if item == current_wikilink or item contains current_wikilink -%}
+      {%- assign match_found = true -%}
+      {%- break -%}
+      {%- endif -%}
+      {%- endfor -%}
+      {%- else -%}
+      {%- if values == current_wikilink or values contains current_wikilink -%}
+      {%- assign match_found = true -%}
+      {%- endif -%}
+      {%- endif -%}
+      {%- endif -%}
+      {%- if match_found -%}
+      {%- assign backlinks = backlinks | push: doc -%}
+      {%- break -%}
+      {%- endif -%}
+      {%- endfor -%}
+      {%- endfor -%}
+      
+      
+      {% if backlinks.size > 0 %}
+      <section>
+        <h2>Mentioned In</h2>
+    
+        {% assign groups = backlinks | group_by: "collection" %}
+    
+        {% for group in groups %}
+          {% assign label = group.name | capitalize %}
+          <h3>{{ label }}</h3>
+          <ul>
+            {% for doc in group.items %}
+              <li>
+                <a href="{{ doc.url }}">{{ doc.title }}</a>
+                {% if doc.date %}
+                  <span> ({{ doc.date | date: "%Y-%m-%d" }})</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </section>
+    {% endif %}
+    
+      
+
+    </article>
+  </main>
+  
