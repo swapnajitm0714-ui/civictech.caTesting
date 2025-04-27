@@ -38,91 +38,119 @@ layout: base
           <p>{{ page.excerpt }}</p>
         {% endif %}
       </hgroup>
-      {% if page.project_website %}
-      <a href="{{ page.project_website }}" target="_blank">Visit Project Website</a>
-      {% endif %}
     </header>
     
-    <!-- PITCH -->
-    {% if page.project_pitch %}
-    <section>
-      <h2>Pitch</h2>
-      <p>{{ page.project_pitch }}</p>
-    </section>
-    {% endif %}
-    
-    <!-- DESCRIPTION -->
-    <section>
-      {{ page.content }}
-    </section>
+    <div style="
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 1rem;
+    ">
+      <div>
+        <!-- PITCH -->
+        {% if page.project_pitch %}
+        <section>
+          <h2>Pitch</h2>
+          <p>{{ page.project_pitch }}</p>
+        </section>
+        {% endif %}
+        
+        <!-- DESCRIPTION -->
+        <section>
+          {{ page.content }}
+        </section>
+      </div>
+      <!-- STATUS -->
+      <aside>
+        <h2>Project Information</h2>
+        <h3>Status</h3>
+        <dl>
+          <dt>Project Stage</dt>
+          <dd>{{ page.status_project }}</dd> 
+          <!-- Prototype | Active | Paused | Completed | Archived | Abandoned -->
+          <dt>Contributor Status</dt>
+          <dd>{{ page.status_contributor }}</dd> 
+          <!-- Open | Limited | Closed -->
+        </dl>
+        <!-- LINKS -->
+        <h3>Links</h3>
+        {% if page.project_website %}<a role="button" href="{{ page.project_website }}" target="_blank"
+          >Visit Project</a>{% endif %}
 
-    <!-- PEOPLE -->
-    {% if resolved_people.size > 0 %}
-    <section>
-      <h2>People</h2>
-      <ul>
-        {% for person in resolved_people %}
-        <li><a href="{{ person.url }}">{{ person.title }}</a></li>
-        {% endfor %}
-      </ul>
-    </section>
-    {% endif %}
+        <h4>Social</h4>
+        <nav>
+          <ul>
+            {% if page.project_slack %}<li><a href="{{ page.project_slack }}" target="_blank">Slack Channel</a></li>{% endif %}
+            {% if page.project_email %}<li><a  href="mailto:{{ page.project_email }}" target="_blank">Email</a></li>{% endif %}
+            {% if page.project_github %}<li><a  href="{{ page.project_github }}" target="_blank">GitHub Repo</a></li>{% endif %}
+            {% if page.project_twitter %}<li><a  href="{{ page.project_twitter }}" target="_blank">Twitter</a></li>{% endif %}
+            {% if page.project_discord %}<li><a  href="{{ page.project_discord }}" target="_blank">Discord</a></li>{% endif %}
+            {% if page.project_linkedin %}<li><a  href="{{ page.project_linkedin }}" target="_blank">LinkedIn</a></li>{% endif %}
+            {% if page.project_youtube %}<li><a  href="{{ page.project_youtube }}" target="_blank">YouTube</a></li>{% endif %}
+          </ul>
+        </nav>
 
-    <!-- LINKS -->
-    <section>
-      <h2>Links</h2>
-        {% if page.project_website %}
-        <a href="{{ page.project_website }}" target="_blank"
-        >Visit Project Website</a>
-        {% endif %}
-      
-        {% if page.project_slack %}
-        <a href="{{ page.project_slack }}" target="_blank"
-        >S</a>
-        {% endif %}
-        {% if page.project_github %}
-        <a  href="{{ page.project_github }}" target="_blank"
-        >GH</a>
-        {% endif %}
-        {% if page.project_email %}
-        <a  href="{{ page.project_email }}" target="_blank"
-        >email</a>
-        {% endif %}
-    </section>
-
-    <!-- DEETS -->
-    <aside>
-      <table>
-        <tr><td>Categories</td><td>{% for category in page.categories %} "{{ category }}" {% endfor %}</td></tr>
-        <tr><td>Tags</td><td>{% if page.tags %}{% for tag in page.tags %}<span class="tag">"{{ tag | replace: "type/", "" | replace: "topic/", "" }}" </span>{% endfor %}{% endif %}</td></tr>
-        <tr><td>Since</td><td>{{ page.dateActiveFirst | date: "%B %d, %Y" }}</td></tr>
-      </table>
-    </aside>
-  
+        <!-- DEETS -->
+        <h3>Details</h3>
+        <dl>
+          <dt>Categories</dt>
+          <dd>{% for category in page.categories %} "{{ category }}" {% endfor %}</dd>
+          <dt>Tags</dt>
+          <dd>{% include tags.html tags=page.tags %}</dd>
+          <dt>Since</dt>
+          <dd>{{ page.dateActiveFirst | date: "%B %d, %Y" }}</dd>
+        </dl>
+      </aside>
+    </div>
   </article>
+  <!-- RELATED -->
+  <h2>Related Articles</h2>
+  <!-- PEOPLE -->
+  {% if resolved_people.size > 0 %}
+    <section>
+      <h3>Related People</h3>
+      {% for instance in resolved_people %}
+      <article style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      ">
+        <div>
+          <hgroup>
+            <h4><small>{{ instance.title }}</small></h4>
+            <p>{{ instance.excerpt }}</p>
+          </hgroup>
+        </div>
+        <div>
+          <a role="button" class="outline secondary" href="{{instance.url}}">View Person</a>
+        </div>
+      </article>
+      {% endfor %}
+    </section>
+  {% endif %}
+
+  <!-- Hacknights -->
 
   {% if resolved_hacknights.size > 0 %}
   <section>
-    <h2>Related Hacknights</h2>
-    <div class="grid">
-      {% for instance in resolved_hacknights %}
-      <article>
-        <header class="grid">
-          <hgroup>
-            <h3><small>Hacknight # {{ instance.number }}</small></h3>
-            <p>{{ instance.topic }}</p>
-          </hgroup>
-        </header>
-        {% include embed_youtube.html youtubeID=instance.youtubeID %}
+    <h3>Related Hacknights</h3>
+    {% for instance in resolved_hacknights %}
+    <article style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      ">
+      <div>
+        <hgroup>
+          <h4><small>Hacknight # {{ instance.number }}</small></h4>
+          <p>{{ instance.topic }}</p>
+        </hgroup>
         <p>{{ instance.date | date: "%B %d, %Y" }}</p>
-        <footer>
-          <div style="text-align: right;">
-            <a role="button" class="secondary outline" href="{{instance.url}}">view hacknight</a>
-          </div>
-        </footer>
-      </article>
-      {% endfor %}
-    </div>
+      </div>
+      <div>
+        <a role="button" class="outline secondary" href="{{instance.url}}">View Hacknight</a>
+      </div>
+    </article>
+    {% endfor %}
   </section>
   {% endif %}
 

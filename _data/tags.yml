@@ -1,44 +1,78 @@
-# Auto-generated tag list from archives
-0:
-  - 
+flag:
+  - online-only
+from:
+  - breakout
+is:
+  - featured
+topic:
   - accessibility
+  - affordability
+  - archives
   - artificial-intelligence
+  - arts-and-culture
   - blockchain
+  - budgets
   - citizen-sensing
   - civic-tech-enablement
   - civictechto
-  - climate-change
+  - climate
   - co-operatives
   - cybersecurity
   - cycling
+  - data
   - data-privacy
   - democracy
   - economics
   - education
   - elections
-  - featured
+  - employment
+  - environment
   - food-security
   - funding
-  - hacknight
+  - futurism
   - homelessness
   - housing
-  - immigration
+  - immigration-and-citizenship
+  - infrastructure
   - international-security
   - internet-access
+  - justice
+  - library
+  - lobbying
+  - maps
+  - mutual-aid
   - neighbourhoods
-  - online-only
+  - noise
+  - nonprofit
   - open-data
+  - open-government
   - open-source
-  - organization
-  - organizer
   - play
-  - public-budget
+  - police
+  - policy
+  - practitioner
+  - public-engagement
   - public-health
+  - public-parks
+  - public-safety
   - public-transparency
-  - review-for-issue
+  - robotics
   - service-delivery
-  - speaker
-  - supporter
+  - shelters
+  - tax
+  - transit
   - transportation
+  - urbanism
+  - volunteerism
   - waste
   - water
+type:
+  - hacknight
+  - initiative
+  - organization
+  - organizer
+  - project
+  - resource
+  - speaker
+  - supporter
+  - venue

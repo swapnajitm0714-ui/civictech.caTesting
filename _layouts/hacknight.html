@@ -2,6 +2,7 @@
 layout: base
 ---
 
+<!-- SPEAKERS -->
 {% comment %} Resolving Speakers {% endcomment %}
 {% assign resolved_speakers = "" | split: "" %}
 {% for speaker in page.speakers %}
@@ -12,6 +13,8 @@ layout: base
     {% assign resolved_speakers = resolved_speakers | push: person %}
   {% endif %}
 {% endfor %}
+
+<!-- VENUES -->
 
 {% comment %} Resolving Venues {% endcomment %}
 {% assign resolved_venue = "" | split: "" %}
@@ -25,7 +28,71 @@ layout: base
 {% endfor %}
 
 
+<!-- BACKLINKING -->
+
+{% assign current_slug = page.relative_path | split: '/' | last | remove: '.md' %}
+{% assign current_wikilink = '[[' | append: current_slug | append: ']]' %}
+
+{%- assign backlinks = "" | split: "" -%}
+
+{%- assign collections_to_check = 
+site.projects
+-%}
+
+{%- assign fields_to_check = "hacknight" | split: "," -%}
+
+
+{%- for doc in collections_to_check -%}
+{%- assign match_found = false -%}
+{%- for field in fields_to_check -%}
+{%- assign values = doc[field] -%}
+{%- if values -%}
+{%- assign values_str = values | join: '' -%}
+{%- if values_str != values -%}
+{%- for item in values -%}
+{%- if item == current_wikilink or item contains current_wikilink -%}
+{%- assign match_found = true -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- else -%}
+{%- if values == current_wikilink or values contains current_wikilink -%}
+{%- assign match_found = true -%}
+{%- endif -%}
+{%- endif -%}
+{%- endif -%}
+{%- if match_found -%}
+{%- assign backlinks = backlinks | push: doc -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+{%- endfor -%}
+
+<!-- TAGS -->
+
+{% assign topic_tags = "" | split: "," %}
+
+{% for tag in page.tags %}
+{% if tag contains "topic/" %}
+{% assign topic_name = tag | replace: "topic/", "" | replace: "-", " " | capitalize %}
+{% assign topic_tags = topic_tags | push: topic_name %}
+{% endif %}
+{% endfor %}
+
+{% assign topic_tags = topic_tags | uniq %}
+{% assign topic_tags = topic_tags | sort %}
+
+
+
+
 <main class="container">
+  <nav aria-label="breadcrumb">
+    <ul>
+      <li><a href="{{ site.baseurl }}/">Home</a></li>
+      <li><a href="{{ site.baseurl }}/hacknights">Hacknights</a></li>
+      <li>Hacknight #{{ page.number }}</li>
+    </ul>
+  </nav>
   <article>
     <header>
       <hgroup>
@@ -53,113 +120,89 @@ layout: base
       </hgroup>
     </header>
 
-    {% if page.youtubeID %}
-      <section>
-        <h2>Recording</h2>
-        {% include embed_youtube.html youtubeID=page.youtubeID %}
-      </section>
-    {% endif %}
 
-    <p>{{ page.image }}</p>
-    <p>{{ page.description }}</p>
+    <div style="
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 1rem;
+    ">
+      <div>
+        {% if page.youtubeID %}
+          <section>
+            <h2>Recording</h2>
+            {% include embed_youtube.html youtubeID=page.youtubeID %}
+          </section>
+        {% endif %}
 
-
-    {% if resolved_speakers.size > 0 %}
-    <section>
-      <h2>Speakers</h2>
-      {% for speaker in resolved_speakers %}
-        <a href="{{ speaker.url }}">{{ speaker.title }}</a>
-        <p>{{ speaker.description }}</p>
-      {% endfor %}
-    </section>
-    {% endif %}
+        <p>{{ page.image }}</p>
+        <p>{{ page.description }}</p>
 
 
-    {{ content }}
+        {% if resolved_speakers.size > 0 %}
+        <section>
+          <h2>Speakers</h2>
+          {% for speaker in resolved_speakers %}
+            <a href="{{ speaker.url }}">{{ speaker.title }}</a>
+            <p>{{ speaker.description }}</p>
+          {% endfor %}
+        </section>
+        {% endif %}
 
+        {{ content }}
+      </div>
+      <aside>
+        <h2>Details</h2>
+        {% if page.eventUrl %}
+          <p>
+            <a href="{{page.eventUrl}}" target="_blank">Event Page</a>
+          </p>
+        {% endif %}
+        <p>Date: {{ page.date | date: "%B %d, %Y" }}</p>
+        {% if resolved_venue.size > 0 %}{% for venue in resolved_venue %}
+          <p>Location: {{ venue.title }}</p>
+          {% endfor %}{% endif %}
 
-
-
-    {% assign current_slug = page.relative_path | split: '/' | last | remove: '.md' %}
-    {% assign current_wikilink = '[[' | append: current_slug | append: ']]' %}
-    
-    {%- assign backlinks = "" | split: "" -%}
-    
-    {%- assign collections_to_check = 
-      site.projects
-      -%}
-      
-      {%- assign fields_to_check = "hacknight" | split: "," -%}
-      
-      
-      {%- for doc in collections_to_check -%}
-      {%- assign match_found = false -%}
-      {%- for field in fields_to_check -%}
-      {%- assign values = doc[field] -%}
-      {%- if values -%}
-      {%- assign values_str = values | join: '' -%}
-      {%- if values_str != values -%}
-      {%- for item in values -%}
-      {%- if item == current_wikilink or item contains current_wikilink -%}
-      {%- assign match_found = true -%}
-      {%- break -%}
-      {%- endif -%}
-      {%- endfor -%}
-      {%- else -%}
-      {%- if values == current_wikilink or values contains current_wikilink -%}
-      {%- assign match_found = true -%}
-      {%- endif -%}
-      {%- endif -%}
-      {%- endif -%}
-      {%- if match_found -%}
-      {%- assign backlinks = backlinks | push: doc -%}
-      {%- break -%}
-      {%- endif -%}
-      {%- endfor -%}
-      {%- endfor -%}
-      
-      
-      {% if backlinks.size > 0 %}
-      <section>
-        <h2>Mentioned In</h2>
-    
-        {% assign groups = backlinks | group_by: "collection" %}
-    
-        {% for group in groups %}
-          {% assign label = group.name | capitalize %}
-          <h3>{{ label }}</h3>
-          <ul>
-            {% for doc in group.items %}
-              <li>
-                <a href="{{ doc.url }}">{{ doc.title }}</a>
-                {% if doc.date %}
-                  <span> ({{ doc.date | date: "%Y-%m-%d" }})</span>
-                {% endif %}
-              </li>
-            {% endfor %}
-          </ul>
-        {% endfor %}
-      </section>
-    {% endif %}
-  
-  
-
-
+        {% include tags.html tags=page.tags %}
+      </aside>
+    </div>
 
     <footer>
-      <h2>Details</h2>
-      {% if page.eventUrl %}
-        <p>
-          <a href="{{page.eventUrl}}" target="_blank">Event Page</a>
-        </p>
-      {% endif %}
-      <p>{{ page.date }}</p>
-
-      {% if resolved_venue.size > 0 %}
-        {% for venue in resolved_venue %}
-        <p>{{ venue.title }}</p>
-        {% endfor %}
-      {% endif %}
+      
     </footer>
   </article>
+
+
+  {% if backlinks.size > 0 %}
+      <section>
+        <h2>Related Articles</h2>
+    
+        {% assign groups = backlinks | group_by: "collection" %}
+
+        {% for group in groups %}
+          {% assign label = group.name | capitalize %}
+          <h3>Related {{ label }}</h3>
+            {% for doc in group.items %}
+            <article style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            ">
+              <div>
+                <hgroup>
+                  <h4><small>{{ doc.title }}</small></h4>
+                  <p>{{ instance.topic }}</p>
+                </hgroup>
+                {% if doc.date %}
+                <p> ({{ doc.date | date: "%Y-%m-%d" }})</p>
+              {% endif %}
+              </div>
+              <div>
+                <a role="button" class="outline secondary" href="{{doc.url}}">View</a>
+              </div>
+            </article>
+            {% endfor %}
+        {% endfor %}
+      </section>
+    {% endif %}
+
 </main>

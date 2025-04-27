@@ -22,6 +22,9 @@ permalink: "/projects/"
   <article>
     <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
     <p>{{ project.excerpt }}</p>
+    {% if project.tags %}
+    {% include topic-tags.html tags=project.tags %}
+    {% endif %}
     <div role="group">
       {% if project.project_website %}
       <a role="button" class="outline" href="{{ project.project_website }}" target="_blank">Website</a>
@@ -71,13 +74,14 @@ unique_topics=unique_topics
 
 <!-- Organizing Projects by Status -->
 
-{% assign status_groups = all_projects | group_by: "status_community" %}
+{% assign status_groups = all_projects | group_by: "status_project" %}
 
 <!-- Table of Projects -->
 <table id="projectsTable" class="striped">
 <thead>
 <tr>
 <th>Project</th>
+<th>Status</th>
 <th>Links</th>
 </tr>
 </thead>
@@ -100,11 +104,19 @@ unique_topics=unique_topics
 {% assign topics_string = formatted_topics | join: ", " %}
 
 <tr class="filterRow" data-topics="{{ topics_string }}">
-<td><a href="{{ project.url }}">{{ project.title }}</a><br/>
+<td>
+{% if project.fromBreakout == True %}✨{% endif %}
+<a href="{{ project.url }}">{{ project.title }}</a>
 {% if project.excerpt %}
-{{ project.excerpt }}
+<br/>{{ project.excerpt }}
 {% endif %}
-<small>Topics: {{ topics_string }}</small>
+{% if project.tags %}
+<br/>
+  {% include topic-tags.html tags=project.tags%}
+{% endif %}
+</td>
+<td>
+ {{ project.status_project }}
 </td>
 <td>
 <div role="group">

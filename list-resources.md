@@ -131,8 +131,8 @@ unique_topics=unique_topics
 <td>
   <small>{{ category | replace: "-", " " | capitalize }}</small><br/>
   <strong>{{ resource.title }}</strong> – {{ resource.description | default: "" }}<br/>
-  {% if topics_string %}
-  <small>Topics: {{ topics_string }}</small>
+  {% if resource.tags %}
+    {% include topic-tags.html tags=resource.tags%}
   {% endif %}
 </td>
 <td>

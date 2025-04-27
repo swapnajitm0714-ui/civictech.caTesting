@@ -1,0 +1,19 @@
+{% comment %}
+tags.html
+Usage: {% include tags.html tags=page.tags %}
+{% endcomment %}
+
+{% if include.tags %}
+<ul class="tags">
+  {% for full_tag in include.tags %}
+    {% assign parts = full_tag | split: "/" %}
+    {% assign namespace = parts[0] %}
+    {% assign tag = parts[1] %}
+    {% assign slug = tag | downcase | replace: " ", "-" | replace: "_", "-" | replace: "/", "-" %}
+    
+    <li class="tag-item">
+      <a href="{{ site.baseurl }}/tags/{{ namespace }}/{{ slug }}/">{{ full_tag }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endif %}

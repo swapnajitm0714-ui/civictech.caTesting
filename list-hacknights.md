@@ -72,7 +72,7 @@ unique_topics=unique_topics
     <p>with {{ speakers_text_array | join: ", " }}</p>
   {% endif %}
   {% if topics_string.size > 0 %}
-    <small>Topics: {{ topics_string }}</small>
+    {% include topic-tags.html tags=event.tags%}
   {% endif %}
 </td>
 <td>

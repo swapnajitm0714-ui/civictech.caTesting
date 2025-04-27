@@ -1,0 +1,49 @@
+---
+layout: base
+---
+
+<main class="container">
+  <nav aria-label="breadcrumb">
+    <ul>
+      <li><a href="{{ site.baseurl }}/">Home</a></li>
+      <li><a href="{{ site.baseurl }}/tags/">Tags</a></li>
+      <li>{{ page.namespace | capitalize }}</li>
+    </ul>
+  </nav>
+
+  <article>
+    <header>
+      <hgroup>
+        <h1>{{ page.namespace | capitalize }} Tags</h1>
+        <p>Browse all tags under the "{{ page.namespace }}" category.</p>
+      </hgroup>
+    </header>
+
+    <section>
+      <ul>
+        {% assign namespace = page.namespace %}
+        {% assign tags = site.data.tags[namespace] %}
+        
+        {% for tag in tags %}
+          {% assign slug = tag | downcase | replace: " ", "-" | replace: "_", "-" | replace: "/", "-" %}
+          {% assign full_tag = namespace | append: "/" | append: tag %}
+
+          {% assign total = 0 %}
+          {% assign collections = site.collections | where_exp: "collection", "collection.label != nil" %}
+          {% for collection in collections %}
+            {% for item in collection.docs %}
+              {% if item.tags contains full_tag %}
+                {% assign total = total | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+
+          <li>
+            <a href="{{ site.baseurl }}/tags/{{ namespace }}/{{ slug }}/">{{ tag | capitalize }}</a> ({{ total }})
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+  </article>
+</main>
