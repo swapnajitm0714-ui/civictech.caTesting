@@ -1,0 +1,52 @@
+---
+layout: base
+---
+
+<main class="container">
+  <nav aria-label="breadcrumb">
+    <ul>
+      <li><a href="{{ site.baseurl }}/">Home</a></li>
+      <li><a href="{{ site.baseurl }}/resources/">Resources</a></li>
+      <li>{{ page.title }}</li>
+    </ul>
+  </nav>
+
+  <article>
+    <header>
+      <hgroup>
+        <h1>{{ page.title }}</h1>
+        {% if page.excerpt %}
+          <p>{{ page.excerpt }}</p>
+        {% endif %}
+      </hgroup>
+    </header>
+
+    <section class="resource-details">
+      {% if page.description %}
+        <p>{{ page.description }}</p>
+      {% endif %}
+
+      {% if page.website %}
+        <p>
+          <a href="{{ page.website }}" target="_blank" role="button" rel="noopener">
+            Visit Resource
+          </a>
+        </p>
+      {% endif %}
+
+      {% if page.tags %}
+      <section class="resource-tags">
+        <h2>Tags</h2>
+        {% include topic-tags.html tags=page.tags %}
+      </section>
+      {% endif %}
+    </section>
+
+    {% if page.content %}
+    <section class="resource-body">
+      <h2>More Information</h2>
+      <div>{{ page.content }}</div>
+    </section>
+    {% endif %}
+  </article>
+</main>

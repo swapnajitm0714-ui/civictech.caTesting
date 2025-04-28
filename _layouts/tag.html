@@ -25,12 +25,13 @@ layout: base
 
       {% assign full_tag = page.full_tag %}
       {% assign collections = site.collections | where_exp: "collection", "collection.label != nil" %}
-      
+
       {% for collection in collections %}
         {% assign tagged_items = collection.docs | where_exp: "item", "item.tags contains full_tag" %}
         {% assign tagged_items = tagged_items | sort: "date" | reverse %}
 
         {% if tagged_items.size > 0 %}
+        <section class="tag-collection">
           <h3>{{ collection.label | capitalize }}</h3>
           <ul>
             {% for item in tagged_items %}
@@ -42,11 +43,10 @@ layout: base
               </li>
             {% endfor %}
           </ul>
+        </section>
         {% endif %}
-
       {% endfor %}
 
     </section>
-
   </article>
 </main>

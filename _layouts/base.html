@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <title>{{ title }}</title>
-    <meta name="description" content="{{description}}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.pumpkin.min.css">
-    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/custom.css">
-  </head>
-  <body>
-    {% include header.html %}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.pumpkin.min.css" />
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/custom.css" />
+
+  {% if page.extra_css %}
+    {% for css in page.extra_css %}
+      <link rel="stylesheet" href="{{ css }}">
+    {% endfor %}
+  {% endif %}
+</head>
+
+<body>
+  {% include header.html %}
+  
+  <main id="main-content">
     {{ content }}
-    {% include footer.html %}
-    <script src="{{ site.baseurl }}/assets/js/minimal-theme-switcher.js"></script>
-    <script src="{{ site.baseurl }}/assets/js/modal.js"></script>
-  </body>
+  </main>
+
+  {% include footer.html %}
+
+  <script src="{{ site.baseurl }}/assets/js/minimal-theme-switcher.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/modal.js"></script>
+
+  {% if page.extra_js %}
+    {% for js in page.extra_js %}
+      <script src="{{ js }}"></script>
+    {% endfor %}
+  {% endif %}
+</body>
 </html>

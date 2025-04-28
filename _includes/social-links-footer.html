@@ -1,0 +1,37 @@
+{% comment %}
+Usage:
+{% include social-links-footer.html %}
+{% endcomment %}
+
+{% assign footer_social = site.data.footer_social %}
+
+{% if footer_social %}
+<section class="social-links">
+  <div class="social-button-group">
+    {% for platform in footer_social %}
+      {% assign key = platform[0] %}
+      {% assign details = platform[1] %}
+      
+      {% assign url = details.url %}
+      {% assign custom_icon = details.icon %}
+      {% assign custom_emoji = details.emoji %}
+      {% assign social_data = site.data.social_links[key] %}
+      
+      {% if url %}
+        <a href="{{ url }}" target="_blank" rel="noopener" class="social-button">
+          {% if custom_icon %}
+            <img src="{{ site.baseurl }}/assets/icons/{{ custom_icon }}" alt="{{ social_data.label }}" width="20" height="20">
+          {% elsif custom_emoji %}
+            {{ custom_emoji }}
+          {% elsif social_data.icon %}
+            <img src="{{ site.baseurl }}/assets/icons/{{ social_data.icon }}" alt="{{ social_data.label }}" width="20" height="20">
+          {% elsif social_data.emoji %}
+            {{ social_data.emoji }}
+          {% endif %}
+          <span>{{ social_data.label }}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

@@ -19,11 +19,12 @@ layout: base
       </hgroup>
     </header>
 
-    <section>
+    <section class="namespace-tags">
+      {% assign namespace = page.namespace %}
+      {% assign tags = site.data.tags[namespace] %}
+
+      {% if tags %}
       <ul>
-        {% assign namespace = page.namespace %}
-        {% assign tags = site.data.tags[namespace] %}
-        
         {% for tag in tags %}
           {% assign slug = tag | downcase | replace: " ", "-" | replace: "_", "-" | replace: "/", "-" %}
           {% assign full_tag = namespace | append: "/" | append: tag %}
@@ -39,10 +40,16 @@ layout: base
           {% endfor %}
 
           <li>
-            <a href="{{ site.baseurl }}/tags/{{ namespace }}/{{ slug }}/">{{ tag | capitalize }}</a> ({{ total }})
+            <a href="{{ site.baseurl }}/tags/{{ namespace }}/{{ slug }}/">{{ tag | capitalize }}</a>
+            {% if total > 0 %}
+              <small>({{ total }})</small>
+            {% endif %}
           </li>
         {% endfor %}
       </ul>
+      {% else %}
+        <p>No tags found under this namespace.</p>
+      {% endif %}
     </section>
 
   </article>

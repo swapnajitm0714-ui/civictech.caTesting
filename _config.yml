@@ -7,33 +7,25 @@ description: >-
   Civic Tech Toronto is a vibrant and diverse community of Torontonians engaged 
   in understanding and creating solutions for civic challenges through technology, 
   design, and other innovative means.
+
 baseurl: ""
-# url: "" # the base hostname e.g. http://example.com
 github_username: civictechto
 
 timezone: America/Toronto
-
-# Includes & Excludes
+future: true
 
 exclude:
   - .obsidian
-  - /**/.obsidian
   - .gitignore
-  - /**/.gitignore
   - .gitmodules
   - Gemfile
   - Gemfile.lock
   - README.md
-  - /**/README.md
   - LICENSE
-  - /**/LICENSE
-  - /**/templates
+  - templates
+  - utilities
   - generate-csv copy.html
   - generate-csv.html
-  - /**/utilities
-  - /utilities
-
-# Collections
 
 collections_dir: archives
 collections:
@@ -51,9 +43,11 @@ collections:
     output: true
     permalink: /:collection/:path/
   resources:
-    output: false
+    output: true
+    permalink: /:collection/:path/
   venues:
-    output: false
+    output: true
+    permalink: /:collection/:path/
 
 defaults:
   - scope:
@@ -61,31 +55,32 @@ defaults:
       type: hacknights
     values:
       layout: hacknight
-      category: events
       sort_by: date
-
   - scope:
       path: ""
       type: organizations
     values:
-      layout: page
-      category: community
-
+      layout: organization
   - scope:
       path: ""
       type: people
     values:
-      category: people
       layout: person
-
   - scope:
       path: ""
       type: projects
     values:
       layout: project
-      category: projects
-
-# Plugins
+  - scope:
+      path: ""
+      type: venues
+    values:
+      layout: venue
+  - scope:
+      path: ""
+      type: resources
+    values:
+      layout: resource
 
 plugins:
   # - jekyll-feed
@@ -93,6 +88,3 @@ plugins:
   # - jekyll-last-modified-at
 
 use_html_extension: false
-# open_external_links_in_new_tab: false
-# permalink: pretty
-# relative_permalinks: false

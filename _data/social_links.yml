@@ -1,0 +1,33 @@
+website:
+  label: Website
+  icon: link.svg
+wikipedia:
+  label: Wikipedia
+  icon: wikipedia.svg
+linkedin:
+  label: LinkedIn
+  icon: linkedin.svg
+instagram:
+  label: Instagram
+  icon: instagram.svg
+twitter:
+  label: Twitter
+  icon: twitter.svg
+github:
+  label: GitHub
+  icon: github.svg
+facebook:
+  label: Facebook
+  icon: facebook.svg
+slack:
+  label: Slack
+  icon: slack.svg
+youtube:
+  label: YouTube
+  icon: youtube.svg
+bluesky:
+  label: BlueSky
+  icon: bluesky.svg
+guild:
+  label: Guild
+  emoji: 🗓️

@@ -2,16 +2,30 @@
 layout: page
 ---
 
+<main class="container">
+  <header>
+    <h1>All Tags</h1>
+    <p>Browse all tags by namespace.</p>
+  </header>
 
-<h1>All Tags</h1>
+  <section class="all-tags">
+    {% for namespace in site.data.tags %}
+      <section class="namespace-tags">
+        <h2>{{ namespace[0] | capitalize }}</h2>
 
-{% for namespace in site.data.tags %}
-  <h2>{{ namespace[0] }}</h2>
-  <ul>
-    {% for tag in namespace[1] %}
-      <li>
-        <a href="/tags/{{ namespace[0] }}/{{ tag }}/">{{ tag }}</a>
-      </li>
+        {% if namespace[1].size > 0 %}
+        <ul>
+          {% for tag in namespace[1] %}
+            {% assign slug = tag | downcase | replace: " ", "-" | replace: "_", "-" | replace: "/", "-" %}
+            <li>
+              <a href="{{ site.baseurl }}/tags/{{ namespace[0] }}/{{ slug }}/">{{ tag | capitalize }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+          <p><small>No tags found.</small></p>
+        {% endif %}
+      </section>
     {% endfor %}
-  </ul>
-{% endfor %}
+  </section>
+</main>

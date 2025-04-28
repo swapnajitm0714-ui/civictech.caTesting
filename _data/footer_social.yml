@@ -1,0 +1,14 @@
+slack:
+  label: Slack
+  url: "http://link.civictech.ca/slack"
+  icon: slack.svg
+
+guild:
+  label: Guild
+  url: "https://guild.host/ctto/events"
+  emoji: 🗓️
+
+github:
+  label: GitHub
+  url: "https://github.com/civictechto"
+  icon: github.svg

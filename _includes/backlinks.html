@@ -1,0 +1,58 @@
+{% comment %} 
+backlinks.html
+Usage: 
+{% include backlinks.html collections=site.hacknights fields="team,speakers" title="Mentioned In" %}
+{% endcomment %}
+
+{% assign backlinks_title = include.title | default: "Mentioned In" %}
+{% assign fields_to_check = include.fields | split: "," %}
+{% assign backlinks = "" | split: "" %}
+
+{%- assign current_slug = include.current_slug | default: page.relative_path | split: '/' | last | remove: '.md' -%}
+{%- assign current_wikilink = '[[' | append: current_slug | append: ']]' -%}
+
+{% for doc in include.collections %}
+  {% assign match_found = false %}
+  {% for field in fields_to_check %}
+    {% assign values = doc[field] %}
+    {% if values %}
+      {% assign values_str = values | join: '' %}
+      {% if values_str != values %}
+        {% for item in values %}
+          {% if item == current_wikilink or item contains current_wikilink %}
+            {% assign match_found = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% if values == current_wikilink or values contains current_wikilink %}
+          {% assign match_found = true %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    {% if match_found %}
+      {% assign backlinks = backlinks | push: doc %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% if backlinks.size > 0 %}
+<section class="backlinks">
+  <h2>{{ backlinks_title }}</h2>
+  {% assign groups = backlinks | group_by: "collection" %}
+  {% for group in groups %}
+    <h3>{{ group.name | capitalize }}</h3>
+    <ul>
+      {% for doc in group.items %}
+        <li>
+          <a href="{{ doc.url }}">{{ doc.title }}</a>
+          {% if doc.date %}
+            <small>({{ doc.date | date: "%Y-%m-%d" }})</small>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+</section>
+{% endif %}
