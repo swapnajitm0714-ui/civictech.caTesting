@@ -3,22 +3,24 @@ name: Build and Deploy GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main  # Adjust if your main branch is different (e.g., 'master')
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout repository (with submodules)
       uses: actions/checkout@v4
+      with:
+        submodules: recursive
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.2'
 
-    - name: Install Jekyll dependencies
+    - name: Install Jekyll and Bundler
       run: |
         gem install bundler
         bundle install
@@ -33,7 +35,7 @@ jobs:
         chmod +x _scripts/update-tags.sh
         ./_scripts/update-tags.sh
 
-    - name: Generate tag pages
+    - name: Generate tag pages (/tags/)
       run: |
         chmod +x _scripts/generate_tag_pages.sh
         ./_scripts/generate_tag_pages.sh
