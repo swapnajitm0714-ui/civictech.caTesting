@@ -1,12 +1,21 @@
-flag:
-  - online-only
-from:
-  - breakout
+
+type:
+  - hacknight
+  - initiative
+  - organization
+  - organizer
+  - person
+  - project
+  - resource
+  - speaker
+  - supporter
+  - venue
 is:
   - featured
 topic:
   - accessibility
   - affordability
+  - air-quality
   - archives
   - artificial-intelligence
   - arts-and-culture
@@ -30,6 +39,7 @@ topic:
   - food-security
   - funding
   - futurism
+  - health
   - homelessness
   - housing
   - immigration-and-citizenship
@@ -66,14 +76,7 @@ topic:
   - volunteerism
   - waste
   - water
-type:
-  - hacknight
-  - initiative
-  - organization
-  - organizer
-  - person
-  - project
-  - resource
-  - speaker
-  - supporter
-  - venue
+flag:
+  - online-only
+from:
+  - breakout

@@ -3,7 +3,7 @@ name: Build and Deploy GitHub Pages
 on:
   push:
     branches:
-      - main  # Adjust if your main branch is different (e.g., 'master')
+      - main  # Adjust if your default branch is different
 
 jobs:
   build:
@@ -25,15 +25,10 @@ jobs:
         gem install bundler
         bundle install
 
-    - name: Install yq
+    - name: Generate tag data (_data/tags.yml)
       run: |
-        sudo apt-get update
-        sudo apt-get install -y yq
-
-    - name: Update tags (_data/tags.yml)
-      run: |
-        chmod +x _scripts/update-tags.sh
-        ./_scripts/update-tags.sh
+        chmod +x _scripts/generate_tag_data.sh
+        ./_scripts/generate_tag_data.sh
 
     - name: Generate tag pages (/tags/)
       run: |
