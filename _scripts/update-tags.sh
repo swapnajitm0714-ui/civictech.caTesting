@@ -30,14 +30,18 @@ find "$ARCHIVES_DIR" -type f -name "*.md" -print0 | while IFS= read -r -d '' fil
     continue
   fi
 
-  # Parse only frontmatter with yq
-  tags=$(echo "$FRONTMATTER" | yq '.tags' 2>/dev/null || echo "")
+  # Check if frontmatter is valid YAML before processing
+  if echo "$FRONTMATTER" | yq e '.' >/dev/null 2>&1; then
+    tags=$(echo "$FRONTMATTER" | yq e '.tags' 2>/dev/null || echo "")
 
-  if [ -n "$tags" ]; then
-    echo "$FRONTMATTER" | yq '.tags[]' 2>/dev/null | while IFS= read -r tag; do
-      [ -z "$tag" ] && continue
-      echo "$tag" >> "$TMP_TAGS"
-    done
+    if [ -n "$tags" ] && [ "$tags" != "null" ]; then
+      echo "$FRONTMATTER" | yq e '.tags[]' 2>/dev/null | while IFS= read -r tag; do
+        [ -z "$tag" ] && continue
+        echo "$tag" >> "$TMP_TAGS"
+      done
+    fi
+  else
+    echo "⚠️ Skipping invalid YAML front matter in $file"
   fi
 done
 

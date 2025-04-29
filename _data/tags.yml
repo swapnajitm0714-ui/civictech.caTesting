@@ -71,6 +71,7 @@ type:
   - initiative
   - organization
   - organizer
+  - person
   - project
   - resource
   - speaker
