@@ -64,6 +64,9 @@ layout: base
 
     <div class="main-with-sidebar">
       <div class="main-content">
+        {% if page.image %}
+          <img src="{{ site.baseurl }}/assets/images/hacknights/{{ page.image }}" alt="{{ page.topic }}" class="hacknight-image">
+        {% endif %}
         {% if page.youtubeID %}
           <section>
             <h2>Recording</h2>
