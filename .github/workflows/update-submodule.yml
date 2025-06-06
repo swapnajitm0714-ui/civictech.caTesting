@@ -1,0 +1,31 @@
+name: Update Archives Submodule and Trigger Pages Build
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # every hour
+  workflow_dispatch:
+
+jobs:
+  update-submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout parent repository with submodules
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update 'archives' submodule
+        run: |
+          git submodule update --remote archives
+          git add archives
+          git commit -m "Auto-update archives submodule to latest master" || echo "No changes to commit"
+
+      - name: Push changes if any
+        run: |
+          git push || echo "Nothing to push"
