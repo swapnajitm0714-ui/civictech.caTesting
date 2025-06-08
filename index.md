@@ -1,6 +1,6 @@
 ---
 title: "Home"
-layout: home
+layout: homepage
 ---
 
 <article class="grid">
@@ -75,34 +75,4 @@ layout: home
 
 </section>
 
-<section>
-<hgroup>
-<h3>Past Speakers</h3>
-Some of our past hacknight speakers
-</hgroup>
 
-<div class="">
-  {% assign featured_speakers = site.people | where_exp: "person", "person.tags contains 'is/featured'" %}
-  
-  {% for speaker in featured_speakers limit:9 %}
-    <hgroup>
-      <h4>{{ speaker.name }}</h4>
-      <p>
-        {% if speaker.organization %}
-          {{ speaker.organization | join: ", " }}
-        {% else %}
-          Independent
-        {% endif %}
-      </p>
-    </hgroup>
-  {% endfor %}
-</div>
-
-<a href="/speakers">See all past speakers here!</a>
-
-</section>
-
-<section>
-<h1>Our supporters</h1>
-<p> coming soon</p>
-</section>
