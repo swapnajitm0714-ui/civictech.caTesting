@@ -1,6 +1,6 @@
 ---
 title: "Code of Conduct"
-permalink: "/code-of-conduct/"
+permalink: "/code-of-conduct"
 ---
 
 It’s important that all participants are aware of the expectations and our culture, so we’ve put together a Code of Conduct and Anti-harassment Policy for your review and as a reminder of the unwritten rules of generally being a good, kind and supportive human being and team player.
