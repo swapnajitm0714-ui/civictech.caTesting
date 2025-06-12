@@ -4,26 +4,148 @@ layout: page
 permalink: "/about-us/"
 ---
 
-Civic Tech Toronto is bringing together an enthusiastic pack of people, to work together, learn together and create civic tech.
 
-To contact us, email hi@civictech.ca
+<section>
+  <h2>What is Civic Tech Toronto?</h2>
+  <p>Civic Tech Toronto is a vibrant and diverse community of Torontonians engaged in understanding and creating solutions for civic challenges through technology, design, and other innovative means.</p>
+</section>
 
-## Get Involved
+<section>
+  <h2>Who's Invited?</h2>
+  <p>We invite people from all backgrounds and skill levels to join us. Whether you’re a tech expert, a curious beginner, or passionate about civic issues, your presence and contribution are valued.</p>
+  <p>Civic Tech Toronto is committed to fostering a safe, inclusive, and enjoyable environment for collaboration. We believe in the power of diverse perspectives and a human-centred approach in tackling civic issues, leading to remarkable outcomes.</p>
+  <a href="/code-of-conduct" class="secondary">Code of Conduct</a>
+</section>
 
-There are several ways you can get involved in Civic Tech TO.
 
-### Attend our weekly hacknights
+<section>
+  <hgroup>
+  <h2>What to Expect?</h2>
+  <p>A typical Tuesday evening Hacknight</p>
+  </hgroup>
+  <div class="grid">
+    <article>
+      <figure>
+        <img
+          src="{{ site.baseurl }}/assets/images/icon-happy-speech-bubble.png"
+          alt="socializing icon"
+        />
+        <figcaption>
+          7:00 pm - Introductions to each other and Civic Tech Toronto
+        </figcaption>
+      </figure>
+    </article>
+    <article>
+          <figure>
+        <img
+          src="{{ site.baseurl }}/assets/images/icon-podium.png"
+          alt="presentation icon"
+        />
+        <figcaption>
+          7:20 pm - Scheduled speaker presents to the group
+        </figcaption>
+      </figure>
+    </article>
+    <article>
+          <figure>
+        <img
+          src="{{ site.baseurl }}/assets/images/icon-collaboration.png"
+          alt="collaboration icon"
+        />
+        <figcaption>
+          7:50 pm - Attendees collaborate on projects
+        </figcaption>
+      </figure>
+  </article>
+</div>
+</section>
 
-The easiest way to get involved is to come out to one of our weekly hacknights! We meet every Tuesday from 6:30pm to 9pm. We start off with a presentation and Q&A from a person or organization doing interesting civic tech work. We then split into breakout groups to work on our various civic tech projects. Afterwards we usually go for drinks at a nearby bar. The venue changes every month so the best way to keep up to date about our events is by joining our Meetup group at https://www.meetup.com/Civic-Tech-Toronto.
+<section>
+<hgroup>
+<h3>Past Speakers</h3>
+Some of our past hacknight speakers
+</hgroup>
 
-### Become a volunteer organizer
+<div class="custom_grid">
+  {% assign featured_speakers = site.people | where_exp: "person", "person.categories contains 'feature'" | sort: "date" | reverse %}
 
-Civic Tech TO is an unincorporated organization and completely volunteer-run — we are always looking for more volunteers to help us keep the weekly hacknights running smoothly. The organizers committee meets once a month where we sign up for a monthly hacknight role, such as maintaining our online presence, taking care of AV, greeting the speaker, or liaising with the venue. If you’re interested in volunteering, send us a message at hi@civictech.ca or speak to any of the [current organizers](/about-us/organizers/) at a hacknight.
+  {% for speaker in featured_speakers limit:9 %}
+    <div>
+      <hgroup>
+        <h4>{{ speaker.title }}</h4>
+        <p>
+          {% if speaker.organization %}
+            {% assign organization_list = "" | split: "" %}
+            {% for organization in speaker.organization %}
+              {% assign organization_name = organization | remove: '[[' | remove: ']]' %}
+              {% assign organization_list = organization_list | push: organization_name %}
+            {% endfor %}
+            {{ organization_list | join: ", " }}
+          {% else %}
+            Unassociated
+          {% endif %}
+        </p>
+      </hgroup>
+    </div>
+  {% endfor %}
+</div>
 
-### Speak at one of our events
+<a href="{{ '/speakers' | relative_url }}">See all past speakers here!</a>
 
-If you’re interested in presenting at one of our hacknights, get in touch with us at hi@civictech.ca to set up a chat. We usually book speakers about one month in advance. Take a look at our [Past Hacknights](/hacknights/) to get an idea of what our previous speakers have talked about.
+</section>
 
-### Provide a venue
 
-Our hacknights switch venues on a monthly basis. The venues need to be able to accommodate approximately 80 people and have adequate AV equipment (projector and microphone). Our venue sponsors typically also sponsor the dinner, which is usually pizza. If your organization would be interested in hosting a month of Civic Tech hacknights, please contact us at hi@civictech.ca.
+<section>
+<hgroup>
+<h3>Our supporters</h3>
+Some of our past supporters
+</hgroup>
+
+<div class="custom_grid">
+  {% assign featured_sponsors = site.organizations | where_exp: "organization", "organization.categories contains 'supporter'" | sort: "date" | reverse %}
+
+  {% for sponsor in featured_sponsors limit:9 %}
+    <div>
+      <hgroup>
+        <h4>{{ sponsor.title }}</h4>
+        <p>
+          {% if sponsor.website %}
+          {% if sponsor.image %}
+            <div class="hacknight-thumbnail">
+              <img src="{{ site.baseurl }}/assets/images/organizations/{{ sponsor.image }}" alt="{{ sponsor.title }} Logo" class="hacknight-image">
+            </div>
+          {% endif %}
+            <a href="{{ sponsor.social.website }}">{{ sponsor.social.website }}</a>
+          {% else %}
+            No website listed
+          {% endif %}
+        </p>
+      </hgroup>
+    </div>
+  {% endfor %}
+</div>
+</section>
+
+<section>
+  <hgroup>
+  <h2>How to Get Involved?</h2>
+  <p>Here are some ways to connect and contribute.</p>
+  </hgroup>
+  <div class="grid">
+    <article>
+      <h3>Attend</h3>
+      <p>The easiest way to get involved is to come out to one of our weekly hacknights!</p>
+      <a role="button" href="{{ '/resources' | relative_url  }}">Sign Up</a>
+    </article>
+    <article>
+      <h3>Speak</h3>
+      <p>If you’re interested in presenting you can get in touch with us to set up a chat.</p>
+        <a role="button" href="mailto:hi@civictech.ca">hi@civictech.ca</a>
+    </article>
+    <article>
+      <h3>Support</h3>
+      <p>As a volunteer run community we are always looking for support. Our hacknights switch venues on a monthly basis. If you have a venue you can provide or other means to support please reach out!</p>
+      <a role="button" href="mailto:hi@civictech.ca">hi@civictech.ca</a>
+    </article>
+  </div>
+</section>

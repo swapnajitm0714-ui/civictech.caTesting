@@ -2,7 +2,6 @@
 title: "Home"
 layout: homepage
 ---
-
 <article class="grid">
 <figure>
   <img
@@ -18,61 +17,140 @@ layout: homepage
 <h1>Hacknights for everyone.</h1>
 <p>Every Tuesday from 7pm to 9pm.</p>
 </hgroup>
-<p>Civic Tech Toronto is a vibrant and diverse community of Torontonians engaged in understanding and creating solutions for civic challenges through technology, design, and other innovative means.</p>
-<p>We now run our Hacknights in a hybrid format, welcoming both online and in-person participation every Tuesday from 7pm to 9pm. At these Hacknights, members of the community gather to hear from inspiring speakers, share and learn about civic tech stories, and collaborate on projects aimed at improving Toronto.</p>
-<a href="https://guild.host/ctto/events" target="_blank"><button class="outline">Sign Up on Guild</button></a>
-<a href="/hacknights"><button class="secondary outline">Past Hacknights</button></a>
+<p>We run Hacknights every Tuesday 7 pm – 9 pm for members of the community gather, hear from inspiring speakers and collaborate on projects aimed at improving Toronto.</p>
+<a role="button" class="outline" href="https://guild.host/ctto/events" target="_blank">Sign Up on Guild<span aria-hidden="true">&nbsp;↗</span></a>
+<a role="button" class="secondary outline" href="{{'/hacknights' | relative_url }}">See past Hacknights</a>
 </div>
 </article>
 
+
+
+
+<!-- === Recent Hacknights ===  -->
+
+<!-- Past Hacknights -->
+
+{% assign now = site.time %}
+{% assign recent_hacknights = site.hacknights | where_exp: "item", "item.date <= now" | sort: "date" | reverse %}
+
 <section>
-  <h2>Who's Invited</h2>
-  <p>We invite people from all backgrounds and skill levels to join us. Whether you’re a tech expert, a curious beginner, or passionate about civic issues, your presence and contribution are valued.</p>
-  <p>Civic Tech Toronto is committed to fostering a safe, inclusive, and enjoyable environment for collaboration. We believe in the power of diverse perspectives and a human-centred approach in tackling civic issues, leading to remarkable outcomes.</p>
-  <a href="/code-of-conduct" class="secondary">Code of Conduct</a>
+  <header>
+    <h2>Recent Hacknights</h2>
+  </header>
+  <div id="pastHacknightsList" class="grid">
+    {% for event in recent_hacknights limit: 3 %}
+      {% assign formatted_topics = "" | split: "," %}
+      {% for tag in event.tags %}
+        {% if tag contains "topic/" %}
+          {% assign topic_name = tag | replace: "topic/", "" | capitalize %}
+          {% assign formatted_topics = formatted_topics | push: topic_name %}
+        {% endif %}
+      {% endfor %}
+      {% assign topics_string = formatted_topics | join: ", " %}
+
+      <article class="card card-row filterRow" data-topics="{{ topics_string }}">
+        <div class="row-content">
+        {% if event.image %}
+          <div class="hacknight-thumbnail">
+            <img src="{{ site.baseurl }}/assets/images/hacknights/thumbnails/{{ event.image }}" alt="{{ event.topic }}" class="hacknight-image">
+          </div>
+        {% endif %}
+          <div class="row-text">
+            <small>{{ event.date | date: "%B %d, %Y" }}</small><br/>
+            <strong>Hacknight #{{ event.number }}</strong><br/>
+            <a href="{{ event.url }}"><strong>{{ event.topic }}</strong></a>
+            {% include topic-tags.html tags=event.tags %}
+            {% if event.speakers %}
+              <br/>
+              {% assign speakers_list = "" | split: "" %}
+              {% for speaker in event.speakers %}
+                {% assign speaker_name = speaker | remove: '[[' | remove: ']]' %}
+                {% assign speakers_list = speakers_list | push: speaker_name %}
+              {% endfor %}
+              <small>with {{ speakers_list | join: ", " }}</small>
+            {% endif %}
+          </div>
+
+          <div class="row-actions">
+            <a role="button" href="{{ event.url }}">View</a>
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+  <a href="{{ '/hacknights' | relative_url }}">See all Hacknights here.</a>
 </section>
+
+
+
+<!-- === Projects Feature ===  -->
+
+{% assign current_projects = site.projects | where_exp: "item", "item.categories contains 'feature project'" %}
+
+<section>
+  <header>
+    <h2>Current Featured Projects</h2>
+  </header>
+  <div class="card-list">
+    {% for project in current_projects %}
+      {% unless project.feature %}
+      {% assign formatted_topics = "" | split: "," %}
+      {% for tag in project.tags %}
+        {% if tag contains "topic/" %}
+          {% assign topic_name = tag | replace: "topic/", "" | capitalize %}
+          {% assign formatted_topics = formatted_topics | push: topic_name %}
+        {% endif %}
+      {% endfor %}
+      {% assign topics_string = formatted_topics | join: ", " %}
+
+      <article class="card card-row filterRow" data-topics="{{ topics_string }}">
+        <div class="row-content">
+          <div class="row-text">
+            <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
+            {% if project.excerpt %}
+              <p>{{ project.excerpt }}</p>
+            {% endif %}
+            {% if project.tags %}
+              {% include topic-tags.html tags=project.tags %}
+            {% endif %}
+          </div>
+          <div class="row-actions">
+            {% if project.project_website %}
+              <a role="button" class="outline" href="{{ project.project_website }}" target="_blank" rel="noopener">Website</a>
+            {% endif %}
+            <a role="button" href="{{ project.url }}">View</a>
+          </div>
+        </div>
+      </article>
+      {% endunless %}
+    {% endfor %}
+  </div>
+  <a href="{{ '/projects' | relative_url }}">See all projects here.</a>
+
+</section>
+
+<!-- === Call to Actions ===  -->
 
 <section>
   <hgroup>
-  <h2>What to Expect</h2>
-  <p>A typical Tuesday evening Hacknight</p>
+  <h2>Calls to Action</h2>
+  <p>Things to click!</p>
   </hgroup>
   <div class="grid">
     <article>
-      <figure>
-        <img
-          src="assets/images/icon-happy-speech-bubble.png"
-          alt="socializing icon"
-        />
-        <figcaption>
-          7:00 pm - Introductions to each other and Civic Tech Toronto
-        </figcaption>
-      </figure>
+      <h3>About Us</h3>
+      <p>Learn about CivicTech Toronto.</p>
+      <a role="button" href="{{ '/about-us' | relative_url  }}">About Us</a>
     </article>
     <article>
-          <figure>
-        <img
-          src="assets/images/icon-podium.png"
-          alt="presentation icon"
-        />
-        <figcaption>
-          7:20 pm - Scheduled speaker presents to the group
-        </figcaption>
-      </figure>
+      <h3>See Resources</h3>
+      <p>See resources useful for engaging in CivicTech.</p>
+      <a role="button" href="{{ '/resources' | relative_url  }}">See Resources</a>
     </article>
     <article>
-          <figure>
-        <img
-          src="assets/images/icon-collaboration.png"
-          alt="collaboration icon"
-        />
-        <figcaption>
-          7:50 pm - Attendees collaborate on projects
-        </figcaption>
-      </figure>
-  </article>
-</div>
-
+      <h3>Get Involved</h3>
+      <p>Find out ways to get involved with the community.</p>
+      <a role="button" href="{{ '/get-involved' | relative_url  }}">Get Involved</a>
+    </article>
+  </div>
 </section>
-
-
