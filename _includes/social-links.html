@@ -11,19 +11,19 @@ Usage:
       {% assign url = key[1] %}
       
       {% assign social_data = site.data.social_links[platform] %}
-      
+      {% assign label = social_data.label | default: platform %}
+
       {% if social_data %}
         <a href="{{ url }}" target="_blank" rel="noopener" class="social-button">
           {% if social_data.icon %}
-            <img src="{{ site.baseurl }}/assets/icons/{{ social_data.icon }}" alt="{{ social_data.label }}" width="20" height="20">
+            <span class="iconstyle">{% include icons/{{ social_data.icon }} %}</span>
           {% elsif social_data.emoji %}
-            {{ social_data.emoji }}
+            <span class="iconstyle">{{ social_data.emoji }}</span>
           {% endif %}
-          <span>{{ social_data.label }}</span>
+          <span>{{ label }}</span>
         </a>
       {% endif %}
     {% endfor %}
   </div>
 </section>
 {% endif %}
-
