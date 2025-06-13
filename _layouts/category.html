@@ -1,14 +1,51 @@
 ---
-layout: page
+layout: base
 ---
 
-<h1>Posts in category "{{ page.title }}"</h1>
+<main class="container">
+  <nav aria-label="breadcrumb">
+    <ul>
+      <li><a href="{{ site.baseurl }}/">Home</a></li>
+      <li><a href="{{ site.baseurl }}/categories/">Categories</a></li>
+      <li>{{ page.category | capitalize }}</li>
+    </ul>
+  </nav>
 
-<ul>
-  {% assign category = page.title %}
-  {% for post in site.posts %}
-    {% if post.categories contains category %}
-      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endif %}
-  {% endfor %}
-</ul>
+  <article>
+    <header>
+      <hgroup>
+        <h1>{{ page.category | capitalize }}</h1>
+        <p>Category</p>
+      </hgroup>
+    </header>
+
+    <section>
+      <h2>Content in "{{ page.category }}"</h2>
+
+      {% assign category_name = page.category %}
+      {% assign collections = site.collections | where_exp: "collection", "collection.label != nil" %}
+
+      {% for collection in collections %}
+        {% assign categorized_items = collection.docs | where_exp: "item", "item.categories contains category_name" %}
+        {% assign categorized_items = categorized_items | sort: "date" | reverse %}
+
+        {% if categorized_items.size > 0 %}
+        <section class="category-collection">
+          <h3>{{ collection.label | capitalize }}</h3>
+          <ul>
+            {% for item in categorized_items %}
+              <li>
+                <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+                {% if item.date %}
+                  <small>({{ item.date | date: "%Y-%m-%d" }})</small>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+      {% endfor %}
+
+    </section>
+  </article>
+</main>

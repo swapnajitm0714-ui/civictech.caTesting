@@ -1,0 +1,21 @@
+---
+layout: page
+---
+
+<main class="container">
+  <header>
+    <h1>All Categories</h1>
+    <p>Browse all content by category.</p>
+  </header>
+
+  <section class="all-categories">
+    <ul>
+      {% for category in site.data.categories.categories %}
+        {% assign slug = category | downcase | replace: " ", "-" | replace: "_", "-" | replace: "/", "-" %}
+        <li>
+          <a href="{{ site.baseurl }}/categories/{{ slug }}/">{{ category | capitalize }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+</main>
