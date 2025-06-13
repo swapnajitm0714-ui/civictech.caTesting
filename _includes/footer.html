@@ -1,3 +1,14 @@
+{%- comment -%}
+Usage:
+  {% include footer.html %}
+This footer include displays the site title, description, social links, and a theme switcher.
+Make sure your site has:
+  - `logo.svg` include (used in the header)
+  - `site.title` and `site.description` configured in _config.yml
+  - `social-links-footer.html` include for social icons/links
+  - Theme switching JavaScript for data-theme-switcher links to work
+{%- endcomment -%}
+
 <footer class="container">
   <header>
     <p><a href="{{ '/' | relative_url }}">{% include logo.svg %}{{ site.title | escape }}</a></p>

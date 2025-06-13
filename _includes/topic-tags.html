@@ -1,7 +1,27 @@
-{% comment %}
+{%- comment -%}
 topic-tags.html
-Usage: {% include topic-tags.html tags=page.tags %}
-{% endcomment %}
+
+Usage:
+  {% include topic-tags.html tags=page.tags %}
+
+Description:
+  Filters a list of tags and displays only those in the "topic" namespace.
+  Renders each topic tag as a stylized badge linking to a topic-specific tag archive.
+
+Requirements:
+  - Tags must follow the `namespace/tag` format (e.g., "topic/accessibility").
+  - Only tags where `namespace == "topic"` will be rendered.
+  - Each tag is:
+      - Slugified for the URL (lowercase, spaces/underscores/slashes → dashes)
+      - Capitalized and spaces restored for the visible label
+
+Output:
+  <a class="badge badge-topic" href="/tags/topic/accessibility/">Accessibility</a>
+
+Notes:
+  - Expects topic archive pages to exist at `/tags/topic/<slug>/`
+  - Customize `.badge-topic` in CSS for appearance
+{%- endcomment -%}
 
 {% if include.tags %}
 <div class="topic-tags">
@@ -16,7 +36,6 @@ Usage: {% include topic-tags.html tags=page.tags %}
         {{ tag | replace: "-", " " | capitalize }}
       </a>
     {% endif %}
-    
   {% endfor %}
 </div>
 {% endif %}

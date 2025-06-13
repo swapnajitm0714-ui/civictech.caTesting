@@ -1,8 +1,27 @@
-{% comment %} 
+{%- comment -%}
 backlinks.html
-Usage: 
-{% include backlinks.html collections=site.hacknights fields="team,speakers" title="Mentioned In" %}
-{% endcomment %}
+
+Usage:
+  {% include backlinks.html collections=site.hacknights fields="team,speakers" title="Mentioned In" %}
+
+Description:
+  Displays a list of documents that reference the current page via wikilinks (`[[slug]]`) in specified fields.
+  Useful for building "backlink" or "mentioned in" sections to show where a person, team, or project is referenced.
+
+Parameters:
+  - `collections`: The collection(s) to scan for backlinks (e.g. `site.hacknights`)
+  - `fields`: Comma-separated list of front matter fields to check for wikilinks (e.g. `team,speakers`)
+  - `title`: Optional section heading (defaults to "Mentioned In")
+  - `current_slug`: Optional override for the page slug (otherwise uses current page path)
+
+Assumptions:
+  - Wikilinks are formatted like `[[my-page-slug]]`
+  - Referenced values can be strings or arrays
+  - Documents have a `collection` property (for grouping), and `url` and `title`
+
+Output:
+  A section listing links to documents that mention the current page.
+{%- endcomment -%}
 
 {% assign backlinks_title = include.title | default: "Mentioned In" %}
 {% assign fields_to_check = include.fields | split: "," %}

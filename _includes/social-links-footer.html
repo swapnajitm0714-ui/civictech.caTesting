@@ -1,7 +1,27 @@
-{% comment %}
+{%- comment -%}
 Usage:
-{% include social-links-footer.html %}
-{% endcomment %}
+  {% include social-links-footer.html %}
+
+Description:
+  Renders a group of social link buttons in the footer.
+  Data source: `_data/footer_social.yml` — a list of platforms with `url`, optional `icon`, and/or `emoji`.
+
+  Each platform key is cross-referenced with `_data/social_links.yml` for fallback `label`, `icon`, or `emoji`.
+
+Example `footer_social.yml` entry:
+  twitter:
+    url: "https://twitter.com/example"
+    icon: "twitter.svg" # or use `emoji: "🐦"`
+
+Requirements:
+  - `_data/footer_social.yml`: defines which platforms to show and any custom display
+  - `_data/social_links.yml`: optional global defaults (icon, emoji, label) for each platform key
+  - `/_includes/icons/`: directory where referenced SVG icons are stored
+
+Optional:
+  - Define `label` in `social_links.yml` for accessible display text
+  - Provide either `icon` or `emoji` per platform, or let the fallback handle it
+{%- endcomment -%}
 
 {% assign footer_social = site.data.footer_social %}
 
@@ -11,7 +31,6 @@ Usage:
     {% for platform in footer_social %}
       {% assign key = platform[0] %}
       {% assign details = platform[1] %}
-      
       {% assign url = details.url %}
       {% assign custom_icon = details.icon %}
       {% assign custom_emoji = details.emoji %}

@@ -1,0 +1,26 @@
+{% comment %}
+  categories.html
+
+  Usage:
+    {% include categories.html categories=page.categories %}
+
+  Description:
+    Renders category names as styled badge links, like tag badges.
+    Each category links to `/categories/<slug>/`, matching the generated category pages.
+
+  Styling:
+    - Base class: .badge
+    - Optional class: .badge-category
+    - Wrapper: .category-badges
+{% endcomment %}
+
+{% if include.categories %}
+<div class="category-badges">
+  {% for category in include.categories %}
+    {% assign slug = category | downcase | replace: " ", "-" | replace: "_", "-" | replace: "/", "-" %}
+    <a class="badge badge-category" href="{{ site.baseurl }}/categories/{{ slug }}/">
+      {{ category | capitalize }}
+    </a>
+  {% endfor %}
+</div>
+{% endif %}

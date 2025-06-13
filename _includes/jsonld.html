@@ -1,3 +1,26 @@
+{%- comment -%}
+Usage:
+  {% include jsonld.html %}
+This include outputs Schema.org structured data (JSON-LD) to enhance SEO and rich results.
+It determines the appropriate @type based on page.tags:
+  - "type/project" → CreativeWork
+  - "type/person" → Person
+  - "type/organization" → Organization
+  - "type/hacknight" → Event
+  - "type/venue" → Place
+  - (fallback) → WebPage
+
+Requirements:
+  - Pages should have appropriate tags in front matter
+  - Optional fields supported: excerpt, description, dateActiveFirst, organization, venue, videoUrl, social.website, parent_organization, speakers, etc.
+  - Uses Liquid's `jsonify` filter to safely escape string values
+
+Note:
+  - All dynamic values are automatically escaped with `jsonify`
+  - Handles [[wikilink]]-style references using `replace` filters
+{%- endcomment -%}
+
+
 {% assign page_tags = page.tags | join: "," %}
 
 <script type="application/ld+json">

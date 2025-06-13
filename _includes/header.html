@@ -1,3 +1,19 @@
+{%- comment -%}
+Usage:
+  {% include header.html %}
+This include adds a responsive site header with:
+  - A "Skip to main content" accessibility link
+  - Logo and site title (via logo.svg and site.title)
+  - A dropdown menu with links to site sections and external resources
+  - Responsive Slack and RSVP buttons (mobile in dropdown, desktop inline)
+
+Requirements:
+  - `logo.svg` include available
+  - `site.title` set in _config.yml
+  - Appropriate CSS for `.mobile-only`, `.desktop-only`, `.dropdown`, and `.skip-link`
+  - JS not strictly required, but dropdown styling assumes modern browser behavior
+{%- endcomment -%}
+
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <header class="container">
   <nav role="navigation">
@@ -23,6 +39,8 @@
             <li><a href="{{ '/projects' | relative_url }}"><span aria-hidden="true">::&nbsp;</span>Projects</a></li>
             <li><a href="{{ '/resources' | relative_url }}"><span aria-hidden="true">::&nbsp;</span>Resources</a></li>
             <li><a href="{{ '/venues' | relative_url }}"><span aria-hidden="true">::&nbsp;</span>Venues</a></li>
+            <li><a href="{{ '/tags' | relative_url }}"><span aria-hidden="true">::&nbsp;</span>Tags</a></li>
+            <li><a href="{{ '/announcements' | relative_url }}"><span aria-hidden="true">::&nbsp;</span>Announcements</a></li>
           </ul>
         </details>
       </li>
