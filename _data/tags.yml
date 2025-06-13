@@ -1,13 +1,12 @@
 
 type:
+  - announcement
   - hacknight
   - initiative
   - organization
-  - organizer
   - person
   - project
   - resource
-  - speaker
   - supporter
   - venue
 is:
@@ -36,6 +35,7 @@ topic:
   - elections
   - employment
   - environment
+  - example
   - food-security
   - funding
   - futurism
@@ -78,5 +78,3 @@ topic:
   - water
 flag:
   - online-only
-from:
-  - breakout
