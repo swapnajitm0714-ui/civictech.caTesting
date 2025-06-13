@@ -10,8 +10,6 @@ type:
   - resource
   - supporter
   - venue
-is:
-  - featured
 topic:
   - accessibility
   - affordability
@@ -77,5 +75,3 @@ topic:
   - volunteerism
   - waste
   - water
-flag:
-  - online-only

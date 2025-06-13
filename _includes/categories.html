@@ -5,8 +5,8 @@
     {% include categories.html categories=page.categories %}
 
   Description:
-    Renders category names as styled badge links, like tag badges.
-    Each category links to `/categories/<slug>/`, matching the generated category pages.
+    Renders category names as styled badge links, supporting namespaced categories
+    like "format/book" or "status/active". Each badge links to `/categories/<namespace>/<slug>/`.
 
   Styling:
     - Base class: .badge
@@ -16,10 +16,14 @@
 
 {% if include.categories %}
 <div class="category-badges">
-  {% for category in include.categories %}
+  {% for full_cat in include.categories %}
+    {% assign parts = full_cat | split: "/" %}
+    {% assign namespace = parts[0] %}
+    {% assign category = parts[1] %}
     {% assign slug = category | downcase | replace: " ", "-" | replace: "_", "-" | replace: "/", "-" %}
-    <a class="badge badge-category" href="{{ site.baseurl }}/categories/{{ slug }}/">
-      {{ category | capitalize }}
+
+    <a class="badge badge-category" href="{{ site.baseurl }}/categories/{{ namespace }}/{{ slug }}/">
+      {{ category | replace: "-", " " | capitalize }}
     </a>
   {% endfor %}
 </div>

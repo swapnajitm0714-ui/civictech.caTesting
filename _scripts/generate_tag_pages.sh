@@ -27,7 +27,7 @@ for ns in $(yq e 'keys | .[]' _data/tags.yml); do
   
   cat > "$TAG_DIR/$ns/index.md" <<EOF
 ---
-layout: namespace
+layout: "tag-namespace"
 title: "$ns Tags"
 namespace: "$ns"
 permalink: /tags/$ns/

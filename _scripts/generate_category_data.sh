@@ -12,7 +12,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# Extract categories under the 'categories:' key
+# Extract categories from front matter
 find "$ARCHIVES_DIR" -type f -name "*.md" -print0 | while IFS= read -r -d '' file; do
   echo "📄 Checking $file"
 
@@ -38,16 +38,42 @@ find "$ARCHIVES_DIR" -type f -name "*.md" -print0 | while IFS= read -r -d '' fil
   ' "$file" >> "$TMP_CATEGORIES"
 done
 
-# Validate
 if [ ! -s "$TMP_CATEGORIES" ]; then
   echo "⚠️ No categories found. Exiting."
   exit 1
 fi
 
 echo "🛠 Building categories.yml..."
-sort -u "$TMP_CATEGORIES" | awk '
-  BEGIN { print "categories:" }
-  NF > 0 { printf "  - \"%s\"\n", $0 }
-' > "$FINAL_CATEGORIES"
+echo "{}" > "$FINAL_CATEGORIES"
+
+sort -u "$TMP_CATEGORIES" | while read -r category; do
+  [ -z "$category" ] && continue
+
+  if [[ "$category" != */* ]]; then
+    echo "⚠️ Skipping un-namespaced category: $category"
+    continue
+  fi
+
+  ns="${category%%/*}"
+  value="${category#*/}"
+
+  printf "%s\n" "$ns:$value" >> "$TMP_CATEGORIES.ns"
+done
+
+# Build grouped YAML
+{
+  echo ""
+  sort -u "$TMP_CATEGORIES.ns" | awk -F: '
+    {
+      ns[$1] = ns[$1] "  - " $2 "\n"
+    }
+    END {
+      for (n in ns) {
+        print n ":"
+        printf "%s", ns[n]
+      }
+    }
+  '
+} > "$FINAL_CATEGORIES"
 
 echo "🎉 Categories written to $FINAL_CATEGORIES"

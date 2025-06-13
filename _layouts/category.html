@@ -7,15 +7,16 @@ layout: base
     <ul>
       <li><a href="{{ site.baseurl }}/">Home</a></li>
       <li><a href="{{ site.baseurl }}/categories/">Categories</a></li>
-      <li>{{ page.category | capitalize }}</li>
+      <li><a href="{{ site.baseurl }}/categories/{{ page.namespace }}/">{{ page.namespace | capitalize }}</a></li>
+      <li>{{ page.title | capitalize }}</li>
     </ul>
   </nav>
 
   <article>
     <header>
       <hgroup>
-        <h1>{{ page.category | capitalize }}</h1>
-        <p>Category</p>
+        <h1>{{ page.title | capitalize }}</h1>
+        <p>{{ page.namespace | capitalize }}</p>
       </hgroup>
     </header>
 

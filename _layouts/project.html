@@ -80,7 +80,8 @@ layout: base
         <h3>Details</h3>
         <dl>
           <dt>Categories</dt>
-          <dd>{% include categories.html categories=page.categories %}</dd>
+          <dd>{% include namespaced-categories.html categories=page.categories namespaces="contributors,status" %}</dd>
+          
           <dt>Tags</dt>
           <dd>{% include tags.html tags=page.tags %}</dd>
           <dt>Since</dt>

@@ -1,33 +1,24 @@
-categories:
-  - "Feature"
-  - "ProjectAbandoned"
-  - "ProjectActive"
-  - "ProjectCompleted"
-  - "ProjectInactive"
-  - "ProjectLive"
-  - "ProjectOpenToContributors"
-  - "Unknown"
-  - "active"
-  - "archives"
-  - "books"
-  - "breakout project"
-  - "civictech"
-  - "community"
-  - "conference"
-  - "datacatalog"
-  - "feature project"
-  - "frontpage"
-  - "government"
-  - "maps"
-  - "media"
-  - "open"
-  - "opendata"
-  - "organizer"
-  - "permanently closed"
-  - "practitioner"
-  - "project partner"
-  - "resourceList"
-  - "school"
-  - "speaker"
-  - "supporter"
-  - "volunteerOpportunities"
+
+meta:
+  - feature
+format:
+  - archive
+  - book
+  - community
+  - conference
+  - datacatalog
+  - maps
+  - opendata
+  - practitioner
+  - resource-list
+  - volunteering
+contributors:
+  - open
+  - paused
+  - unknown
+status:
+  - abandoned
+  - active
+  - closed
+  - inactive
+  - unknown

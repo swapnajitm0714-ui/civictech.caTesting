@@ -4,12 +4,10 @@ set -euo pipefail
 CATEGORY_DIR="categories"
 YAML_FILE="_data/categories.yml"
 
-# Clean previous
 echo "🧹 Cleaning existing category pages..."
 rm -rf "$CATEGORY_DIR"
 mkdir -p "$CATEGORY_DIR"
 
-# Create master index
 echo "⚡ Generating /categories/index.md..."
 cat > "$CATEGORY_DIR/index.md" <<EOF
 ---
@@ -19,19 +17,36 @@ permalink: /categories/
 ---
 EOF
 
-# Generate each category page
-yq e '.categories[]' "$YAML_FILE" | while IFS= read -r category; do
-  slug=$(echo "$category" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]+/-/g; s/^-//; s/-$//')
-  mkdir -p "$CATEGORY_DIR/$slug"
-  cat > "$CATEGORY_DIR/$slug/index.md" <<EOF
+echo "⚡ Generating namespaced category pages..."
+
+for ns in $(yq e 'keys | .[]' "$YAML_FILE"); do
+  mkdir -p "$CATEGORY_DIR/$ns"
+
+  # Namespace index page
+  cat > "$CATEGORY_DIR/$ns/index.md" <<EOF
 ---
-layout: category
-title: "$category"
-category: "$category"
-permalink: /categories/$slug/
+layout: "category-namespace"
+title: "$ns Categories"
+namespace: "$ns"
+permalink: /categories/$ns/
 ---
 EOF
-  echo "✅ Generated category page: $category → /categories/$slug/"
+
+  # Individual category pages
+  yq e ".\"$ns\"[]" "$YAML_FILE" | sed 's/^- //' | while IFS= read -r cat; do
+    slug=$(echo "$cat" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]+/-/g; s/^-//; s/-$//')
+    mkdir -p "$CATEGORY_DIR/$ns/$slug"
+    cat > "$CATEGORY_DIR/$ns/$slug/index.md" <<EOF
+---
+layout: category
+title: "$cat"
+namespace: "$ns"
+category: "$ns/$cat"
+permalink: /categories/$ns/$slug/
+---
+EOF
+    echo "✅ Generated category: $ns/$slug"
+  done
 done
 
-echo "🎉 All category pages generated."
+echo "🎉 All categories generated."

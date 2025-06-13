@@ -18,10 +18,7 @@ permalink: "/projects/"
 {% endfor %}
 {% assign unique_topics = topic_tags | uniq | sort %}
 
-
-
 <!-- Featured Projects -->
-
 <section>
   <header>
     <h2>Current Featured Projects</h2>
@@ -30,7 +27,7 @@ permalink: "/projects/"
 
   <div class="card-grid">
     {% for project in all_projects %}
-      {% if project.categories contains "feature project"%}
+      {% if project.categories contains "feature project" %}
       <article class="card">
         <div class="card-body">
           <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
@@ -39,6 +36,9 @@ permalink: "/projects/"
           {% endif %}
           {% if project.tags %}
             {% include topic-tags.html tags=project.tags %}
+          {% endif %}
+          {% if project.categories %}
+            {% include namespaced-categories.html categories=project.categories namespaces="status,contributors,format" %}
           {% endif %}
         </div>
         <div class="card-footer">
@@ -54,12 +54,10 @@ permalink: "/projects/"
 </section>
 
 <!-- Breakout and Other Projects -->
-
 {% assign breakout_projects = all_projects | where_exp: "item", "item.tags contains 'from/breakout'" %}
 {% assign other_projects = all_projects | reject: "tags", "from/breakout" %}
 
 <!-- Projects Originating from CivicTech Toronto -->
-
 <section>
   <header>
     <h2>Projects Originating from CivicTech Toronto</h2>
@@ -86,6 +84,9 @@ permalink: "/projects/"
             {% if project.tags %}
               {% include topic-tags.html tags=project.tags %}
             {% endif %}
+            {% if project.categories %}
+              {% include namespaced-categories.html categories=project.categories namespaces="status,contributors,format" %}
+            {% endif %}
           </div>
           <div class="row-actions">
             {% if project.project_website %}
@@ -101,7 +102,6 @@ permalink: "/projects/"
 </section>
 
 <!-- Other Community Projects -->
-
 <section>
   <header>
     <h2>Other Community Projects</h2>
@@ -125,6 +125,7 @@ permalink: "/projects/"
             {% if project.excerpt %}
               <p>{{ project.excerpt }}</p>
             {% endif %}
+            {% if project.categories %}{% include namespaced-categories.html categories=project.categories namespaces="status,contributors,format" %}{% endif %}
             {% if project.tags %}
               {% include topic-tags.html tags=project.tags %}
             {% endif %}
