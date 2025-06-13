@@ -26,9 +26,14 @@ exclude:
   - utilities
   - generate-csv copy.html
   - generate-csv.html
+  - sh
 
 collections_dir: archives
 collections:
+  announcements:
+    output: true
+    sort_by: date
+    permalink: /:collection/:path/
   hacknights:
     output: true
     sort_by: date
@@ -50,6 +55,12 @@ collections:
     permalink: /:collection/:path/
 
 defaults:
+  - scope:
+      path: ""
+      type: announcements
+    values:
+      layout: announcement
+      sort_by: date
   - scope:
       path: ""
       type: hacknights
@@ -85,9 +96,5 @@ defaults:
 plugins:
   - jekyll-redirect-from
   - jekyll-sitemap
-
-  # - jekyll-feed
-  # - jekyll-admin
-  # - jekyll-last-modified-at
 
 use_html_extension: false
