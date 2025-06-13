@@ -83,6 +83,9 @@ defaults:
       layout: resource
 
 plugins:
+  - jekyll-redirect-from
+  - jekyll-sitemap
+
   # - jekyll-feed
   # - jekyll-admin
   # - jekyll-last-modified-at
