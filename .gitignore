@@ -1,7 +1,13 @@
+# Core Jekyll Local Development Exclusions
 _site
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
-vendor
-_backup
+
+# Exclusions of Automatically Generated Content Folders (constructed during Github Pages Workflows)
+# For local development executions see .github/workflows/pages.yml
+tags
+categories
+
+# Addtional Appended Ignores
 .DS_Store

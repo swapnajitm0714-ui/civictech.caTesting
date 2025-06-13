@@ -1,6 +1,7 @@
 
 type:
   - announcement
+  - breakout-project
   - hacknight
   - initiative
   - organization

@@ -72,3 +72,16 @@ Handy Notes ~ Submodule Updates
 ```zsh
 git submodule update --remote --merge
 ```
+
+
+Local Development generative categories and tags data
+```zsh
+./_scripts/generate_category_data.sh
+./_scripts/generate_tag_data.sh
+```
+
+and pages
+```zsh
+./_scripts/generate_category_pages.sh
+./_scripts/generate_tag_pages.sh
+```
