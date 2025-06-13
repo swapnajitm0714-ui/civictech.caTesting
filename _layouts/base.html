@@ -23,16 +23,14 @@
   {% endif %}
   <!-- Inclusion of JSON Linked Data -->
   {% include jsonld.html %} 
+  <link rel="icon" href="{{ site.baseurl }}/assets/images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.pumpkin.min.css" />
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/custom.css" />
 </head>
 
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-
   {% include header.html %}
-  
-  <main id="main-content">
+  <main role="main" id="main-content" tabindex="-1">
     {{ content }}
   </main>
 
