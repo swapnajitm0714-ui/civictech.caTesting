@@ -65,17 +65,13 @@ layout: base
     <div class="main-with-sidebar">
       <div class="main-content">
         {% if page.image %}
-          <img src="{{ site.baseurl }}/assets/images/hacknights/{{ page.image }}" alt="{{ page.topic }}" class="hacknight-image">
+          <img style="margin-bottom: 2rem;" src="{{ site.baseurl }}/assets/images/hacknights/{{ page.image }}" alt="{{ page.topic }}" class="hacknight-image">
         {% endif %}
         {% if page.youtubeID %}
           <section>
             <h2>Recording</h2>
             {% include embed_youtube.html youtubeID=page.youtubeID %}
           </section>
-        {% endif %}
-
-        {% if page.image %}
-          <p>{{ page.image }}</p>
         {% endif %}
 
         {% if page.description %}

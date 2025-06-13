@@ -1,5 +1,5 @@
 ---
-title: "Home"
+title: "Civic Tech Toronto | Hacknights, Projects & Community"
 layout: homepage
 ---
 <article class="grid">
