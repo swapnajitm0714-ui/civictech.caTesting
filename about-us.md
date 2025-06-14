@@ -70,39 +70,33 @@ Some of our past hacknight speakers
   {% assign featured_speakers = site.people | where_exp: "person", "person.categories contains 'meta/feature'" | sort: "date" | reverse %}
 
   {% for speaker in featured_speakers limit:9 %}
-    <div>
-      <hgroup>
-        <h4>{{ speaker.title }}</h4>
-        <p>
-          {% if speaker.organization %}
-            {% assign organization_list = "" | split: "" %}
-            {% for organization in speaker.organization %}
-              {% assign organization_name = organization | remove: '[[' | remove: ']]' %}
-              {% assign organization_list = organization_list | push: organization_name %}
-            {% endfor %}
-            {{ organization_list | join: ", " }}
-          {% else %}
-            Unassociated
-          {% endif %}
-        </p>
-      </hgroup>
-    </div>
+    <hgroup>
+      <a href="{{speaker.url}}" alt="{{speark.title}}"><h4>{{ speaker.title }}</h4></a>
+      <p>
+        {% if speaker.organization %}
+          {% assign organization_list = "" | split: "" %}
+          {% for organization in speaker.organization %}
+            {% assign organization_name = organization | remove: '[[' | remove: ']]' %}
+            {% assign organization_list = organization_list | push: organization_name %}
+          {% endfor %}
+          {{ organization_list | join: ", " }}
+        {% else %}
+          Unassociated
+        {% endif %}
+      </p>
+    </hgroup>
   {% endfor %}
 </div>
-
 <a href="{{ '/speakers' | relative_url }}">See all past speakers here!</a>
-
 </section>
-
 
 <section>
 <hgroup>
 <h3>Our supporters</h3>
 Some of our past supporters
 </hgroup>
-
 <div class="custom_grid">
-  {% assign featured_sponsors = site.organizations | where_exp: "organization", "organization.categories contains 'supporter'" | sort: "date" | reverse %}
+  {% assign featured_sponsors = site.organizations | where_exp: "organization", "organization.categories contains 'meta/feature'" | sort: "date" | reverse %}
 
   {% for sponsor in featured_sponsors limit:9 %}
     <div>
@@ -135,7 +129,7 @@ Some of our past supporters
     <article>
       <h3>Attend</h3>
       <p>The easiest way to get involved is to come out to one of our weekly hacknights!</p>
-      <a role="button" href="{{ '/resources' | relative_url  }}">Sign Up</a>
+      <a role="button" href="https://guild.host/civic-tech-toronto/events" target="_blank">Sign Up<span aria-hidden="true">&nbsp;↗</span></a>
     </article>
     <article>
       <h3>Speak</h3>
