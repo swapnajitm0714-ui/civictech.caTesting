@@ -85,7 +85,7 @@ layout: homepage
 
 <!-- === Projects Feature ===  -->
 
-{% assign current_projects = site.projects | where_exp: "item", "item.categories contains 'feature project'" %}
+{% assign current_projects = site.projects | where_exp: "item", "item.categories contains 'meta/feature'" %}
 
 <section>
   <header>

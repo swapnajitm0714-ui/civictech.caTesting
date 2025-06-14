@@ -67,7 +67,7 @@ Some of our past hacknight speakers
 </hgroup>
 
 <div class="custom_grid">
-  {% assign featured_speakers = site.people | where_exp: "person", "person.categories contains 'feature'" | sort: "date" | reverse %}
+  {% assign featured_speakers = site.people | where_exp: "person", "person.categories contains 'meta/feature'" | sort: "date" | reverse %}
 
   {% for speaker in featured_speakers limit:9 %}
     <div>

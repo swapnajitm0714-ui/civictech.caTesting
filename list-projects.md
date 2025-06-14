@@ -27,7 +27,7 @@ permalink: "/projects/"
 
   <div class="card-grid">
     {% for project in all_projects %}
-      {% if project.categories contains "feature project" %}
+      {% if project.categories contains "meta/feature" %}
       <article class="card">
         <div class="card-body">
           <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
@@ -125,7 +125,7 @@ permalink: "/projects/"
             {% if project.excerpt %}
               <p>{{ project.excerpt }}</p>
             {% endif %}
-            {% if project.categories %}{% include namespaced-categories.html categories=project.categories namespaces="status,contributors,format" %}{% endif %}
+            {% if project.categories %}{% include namespaced-categories.html categories=project.categories namespaces="status,contributors" %}{% endif %}
             {% if project.tags %}
               {% include topic-tags.html tags=project.tags %}
             {% endif %}
