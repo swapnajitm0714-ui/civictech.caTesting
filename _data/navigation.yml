@@ -1,0 +1,44 @@
+main:
+  - label: "About Us"
+    url: "/about-us"
+  - label: "Get Involved"
+    url: "/get-involved"
+  - label: "Code of Conduct"
+    url: "/code-of-conduct"
+  - label: "Hacknights"
+    url: "/hacknights"
+    collection: true
+  - label: "Announcements"
+    url: "/announcements"
+    collection: true
+  - label: "Projects"
+    url: "/projects"
+    collection: true
+  - label: "Resources"
+    url: "/resources"
+    collection: true
+  - label: "People"
+    url: "/people"
+    collection: true
+  - label: "Organizations"
+    url: "/organizations"
+    collection: true
+  - label: "Venues"
+    url: "/venues"
+    collection: true
+  - label: "Tags"
+    url: "/tags"
+    collection: true
+  - label: "Categories"
+    url: "/categories"
+    collection: true
+
+utility:
+  - label: "Slack"
+    url: "http://link.civictech.ca/slack"
+    type: "secondary"
+    external: true
+  - label: "RSVP"
+    url: "https://guild.host/ctto/events"
+    type: "primary"
+    external: true
