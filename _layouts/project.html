@@ -59,34 +59,21 @@ layout: base
 
       <aside>
         <h2>Project Information</h2>
-
-        <h3>Status</h3>
-        <dl>
-          <dt>Project Stage</dt>
-          <dd>{{ page.status_project }}</dd>
-          <dt>Contributor Status</dt>
-          <dd>{{ page.status_contributor }}</dd>
-        </dl>
-
-        {% if page.project_website %}
-        <h3>Website</h3>
-        <p><a role="button" href="{{ page.project_website }}" target="_blank">Visit Project</a></p>
-        {% endif %}
-
-        {% if page.social %}
-        {% include social-links.html social=page.social %}
-        {% endif %}
-
         <h3>Details</h3>
         <dl>
           <dt>Categories</dt>
           <dd>{% include namespaced-categories.html categories=page.categories namespaces="contributors,status" %}</dd>
-          
           <dt>Tags</dt>
           <dd>{% include tags.html tags=page.tags %}</dd>
           <dt>Since</dt>
           <dd>{{ page.dateActiveFirst | date: "%B %d, %Y" }}</dd>
         </dl>
+
+        {% if page.social %}
+        {% include social-links.html social=page.social %}
+        {% endif %}
+
+
       </aside>
     </div>
   </article>
