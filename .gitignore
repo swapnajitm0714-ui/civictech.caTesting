@@ -6,8 +6,8 @@ _site
 
 # Exclusions of Automatically Generated Content Folders (constructed during Github Pages Workflows)
 # For local development executions see .github/workflows/pages.yml
-tags
-categories
+# tags
+# categories
 
 # Addtional Appended Ignores
 .DS_Store
