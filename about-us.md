@@ -2,6 +2,7 @@
 title: "About Us"
 layout: page
 permalink: "/about-us/"
+redirect_from: /get-in-touch/
 ---
 
 
