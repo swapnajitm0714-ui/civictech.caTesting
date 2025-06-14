@@ -3,28 +3,27 @@ title: "Civic Tech Toronto | Hacknights, Projects & Community"
 layout: homepage
 ---
 <article class="grid">
-<figure>
-  <img
-    src="assets/images/CivicTechTO-compressed-1020x615-1.jpg"
-    alt="screenshot of a Zoom call with participants waving at the fifth anniversary of Civic Tech"
-  />
-  <figcaption>
-    Fifth Anniversary of Civic Tech
-  </figcaption>
-</figure>
-<div>
-<hgroup>
-<h1>Hacknights for everyone.</h1>
-<p>Every Tuesday from 7pm to 9pm.</p>
-</hgroup>
-<p>We run Hacknights every Tuesday 7 pm – 9 pm for members of the community gather, hear from inspiring speakers and collaborate on projects aimed at improving Toronto.</p>
-<a role="button" class="outline" href="https://guild.host/ctto/events" target="_blank">Sign Up on Guild<span aria-hidden="true">&nbsp;↗</span></a>
-<a role="button" class="secondary outline" href="{{'/hacknights' | relative_url }}">See past Hacknights</a>
-</div>
+  <figure>
+    <img
+      src="assets/images/CivicTechTO-compressed-1020x615-1.jpg"
+      alt="screenshot of a Zoom call with participants waving at the fifth anniversary of Civic Tech"
+    />
+    <figcaption>
+      Fifth Anniversary of Civic Tech
+    </figcaption>
+  </figure>
+  <div>
+    <hgroup>
+    <h1>Hacknights for everyone.</h1>
+    <p>Every Tuesday from 7pm to 9pm.</p>
+    </hgroup>
+    <p>We run Hacknights every Tuesday 7 pm – 9 pm for members of the community gather, hear from inspiring speakers and collaborate on projects aimed at improving Toronto.</p>
+    <div class="button-list">
+      <a role="button" class="outline" href="https://guild.host/ctto/events" target="_blank">Sign Up on Guild<span aria-hidden="true">&nbsp;↗</span></a>
+      <a role="button" class="secondary outline" href="{{'/hacknights' | relative_url }}">See past Hacknights</a>
+    </div>
+  </div>
 </article>
-
-
-
 
 <!-- === Recent Hacknights ===  -->
 
