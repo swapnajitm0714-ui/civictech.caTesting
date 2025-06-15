@@ -10,7 +10,10 @@ Description:
 {% assign branch = site.edit_link.branch | default: "main" %}
 
 {% if page.relative_path %}
-    <a href="{{ base }}/blob/{{ branch }}/{{ page.relative_path }}" target="_blank" rel="noopener">
-      Edit this page on GitHub ↗
-    </a>
+<p>
+  Update:&nbsp;
+  <a href="{{ base }}/blob/{{ branch }}/{{ page.relative_path }}" target="_blank" rel="noopener">Edit this Record ↗</a>
+  &ensp;
+  <a href="{{ base }}/issues/new?title=Suggestion%3A%20Update%20{{ page.title | uri_escape }}&body=Please insert your comments while keeping the link to review file%3A%0A{{ base | uri_escape }}/blob/{{ branch | uri_escape }}/{{ page.relative_path | uri_escape }}" target="_blank" rel="noopener">Open an Issue ↗</a>
+</p>
 {% endif %}
