@@ -61,14 +61,15 @@ layout: base
       <h2>Description</h2>
       <div>{{ page.content }}</div>
     </section>
-    {% endif %}
-
-    {% include backlinks.html 
-      collections=site.hacknights 
-      fields="venue" 
-      title="Hacknights Held Here"
-    %}    
+    {% endif %}    
     <footer>
       {% include edit-link.html %}
     </footer>
   </article>
+
+
+{% include backlinks.html 
+  collections=site.hacknights 
+  fields="venue" 
+  title="Hacknights Held Here"
+%}
