@@ -55,7 +55,6 @@ layout: base
           {{ content }}
         </section>
       </div>
-
       <aside>
         <h2>Project Information</h2>
         <h3>Details</h3>
@@ -71,10 +70,11 @@ layout: base
         {% if page.social %}
         {% include social-links.html social=page.social %}
         {% endif %}
-
-
       </aside>
     </div>
+    <footer>
+      {% include edit-link.html %}
+    </footer>
   </article>
 
   <section class="related-articles">

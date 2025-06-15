@@ -1,0 +1,16 @@
+{%- comment -%}
+Usage:
+  {% include edit-link.html %}
+Description:
+  Creates an "Edit this page on GitHub" link using the page's relative_path.
+  Relies on `edit_link.base_url` and `edit_link.branch` from _config.yml.
+{%- endcomment -%}
+
+{% assign base = site.edit_link.base_url | default: "https://github.com/CivicTechTO/archives" %}
+{% assign branch = site.edit_link.branch | default: "main" %}
+
+{% if page.relative_path %}
+    <a href="{{ base }}/blob/{{ branch }}/{{ page.relative_path }}" target="_blank" rel="noopener">
+      Edit this page on GitHub ↗
+    </a>
+{% endif %}
