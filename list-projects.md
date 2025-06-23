@@ -19,22 +19,22 @@ permalink: "/projects/"
 {% assign unique_topics = topic_tags | uniq | sort %}
 
 <!-- Featured Projects -->
-{% assign featured_projects = all_projects | where_exp: "item", "item.categories contains 'meta/feature'" %}
+{% assign open_projects = all_projects | where_exp: "item", "item.categories contains 'contributors/open'" %}
 
 <!-- Split Breakout and Other Projects -->
 {% assign breakout_projects = all_projects | where_exp: "item", "item.tags contains 'from/breakout'" %}
 {% assign other_projects = all_projects | reject: "tags", "from/breakout" %}
 
 <!-- Featured Projects -->
-{% if featured_projects.size > 0 %}
+{% if open_projects.size > 0 %}
 <section>
   <header>
-    <h2 id="featured">Current Featured Projects</h2>
+    <h2 id="featured">Current Open Projects</h2>
   </header>
-  <p>These are some of our currently featured community projects.</p>
+  <p>These are some of our currently community projects open to new contributors.</p>
 
   <div class="card-grid">
-    {% for project in featured_projects %}
+    {% for project in open_projects %}
       <article class="card">
         <div class="card-body">
           <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
