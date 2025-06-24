@@ -107,7 +107,7 @@ permalink: "/hacknights/"
         {% if event.image %}
           <a href="{{ event.url }}">
             <div class="hacknight-thumbnail">
-              <img src="{{ site.baseurl }}/assets/images/hacknights/thumbnails/{{ event.image }}" alt="{{ event.topic }}" class="hacknight-image">
+              <img data-src="{{ site.baseurl }}/assets/images/hacknights/thumbnails/{{ event.image }}" class="lazy-image" />
             </div>
           </a>
         {% endif %}
