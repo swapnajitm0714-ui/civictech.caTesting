@@ -104,13 +104,13 @@ permalink: "/hacknights/"
 
       <article class="card card-row filterRow" data-topics="{{ topics_string }}">
         <div class="row-content">
-        {% if event.image %}
+        <!-- {% if event.image %}
           <a href="{{ event.url }}">
             <div class="hacknight-thumbnail">
               <img data-src="{{ site.baseurl }}/assets/images/hacknights/thumbnails/{{ event.image }}" class="lazy-image" />
             </div>
           </a>
-        {% endif %}
+        {% endif %} -->
           <div class="row-text">
             <small>
               {{ event.date | date: "%B %d, %Y" }} – Hacknight #{{ event.number }}
