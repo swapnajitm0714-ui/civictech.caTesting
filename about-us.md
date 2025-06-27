@@ -88,7 +88,7 @@ Some of our past hacknight speakers
     </hgroup>
   {% endfor %}
 </div>
-<a href="{{ '/speakers' | relative_url }}">See all past speakers here!</a>
+<a href="{{ '/people' | relative_url }}">See all past speakers here!</a>
 </section>
 
 <section>
