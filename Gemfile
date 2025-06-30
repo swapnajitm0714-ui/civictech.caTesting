@@ -19,7 +19,7 @@ group :jekyll_plugins do
   gem "jekyll-paginate"
   gem "jekyll-admin"
 end
-gem "sinatra", ">= 3", "< 4"
+gem "sinatra", ">= 3", "< 5"
 gem "rackup"
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
