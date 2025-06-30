@@ -5,7 +5,7 @@ permalink: "/hacknights/"
 ---
 
 {% assign now = site.time %}
-{% assign future_hacknights = site.hacknights | where_exp: "item", "item.date > now" | sort: "date" %}
+{% assign future_hacknights = site.hacknights | where_exp: "item", "item.date > now" | sort: "date" |reverse %}
 {% assign past_hacknights = site.hacknights | where_exp: "item", "item.date <= now" | sort: "date" | reverse %}
 
 <!-- Extract unique topics for filters -->
@@ -42,11 +42,12 @@ permalink: "/hacknights/"
 {% endcapture %}
 
 <!-- Upcoming Hacknights -->
-{% if future_hacknights.size > 0 %}
+
 <section>
   <header>
     <h2>Upcoming Hacknights</h2>
   </header>
+  {% if future_hacknights.size > 0 %}
   <div id="hacknightsGrid" class="card-grid">
     {% for event in future_hacknights %}
       {% assign formatted_topics = "" | split: "," %}
@@ -60,7 +61,7 @@ permalink: "/hacknights/"
 
       <article class="card filterRow" data-topics="{{ topics_string }}">
         <div class="card-body">
-          <p><strong>Hacknight #{{ event.number }}</strong></p>
+          <small>{{ event.date | date: "%B %d, %Y" }} – Hacknight #{{ event.number }}</small>
           <h3><a href="{{ event.url }}">{{ event.topic }}</a></h3>
           {% include topic-tags.html tags=event.tags %}
           {% if event.speakers %}
@@ -76,15 +77,16 @@ permalink: "/hacknights/"
         </div>
         <div class="card-footer">
           {% if event.eventUrl %}
-            <a role="button" class="outline" href="{{ event.eventUrl }}" target="_blank" rel="noopener">Event Link</a>
+            <a role="button" class="outline" href="{{ event.eventUrl }}" target="_blank" rel="noopener">Registration<span aria-hidden="true">&nbsp;↗</span></a>
           {% endif %}
-          <a role="button" href="{{ event.url }}">View</a>
         </div>
       </article>
     {% endfor %}
   </div>
+  {% endif %}
+  <p>All upcoming events will be listed on the <a href="https://guild.host/civic-tech-toronto/events" target="_blank" rel="noopener">Events Registration Page<span aria-hidden="true">&nbsp;↗</span></a></p>
 </section>
-{% endif %}
+
 
 <!-- Past Hacknights -->
 <section>

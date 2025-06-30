@@ -93,7 +93,12 @@ layout: base
       <aside>
         <h2>Details</h2>
         {% if page.eventUrl %}
-          <p><a href="{{ page.eventUrl }}" target="_blank" rel="noopener">Event Page</a></p>
+          {% assign now = site.time %}
+          {% if page.date < now %}
+            <p><a href="{{ page.eventUrl }}" target="_blank" rel="noopener">Event Page</a></p>
+          {% else %}
+            <p><a role="button" class="outline" href="{{ page.eventUrl }}" target="_blank" rel="noopener">Registration<span aria-hidden="true">&nbsp;↗</span></a></p>
+          {% endif %}
         {% endif %}
 
         <p>Date: {{ page.date | date: "%B %d, %Y" }}</p>
