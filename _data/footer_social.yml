@@ -6,7 +6,8 @@ slack:
 guild:
   label: Guild
   url: "https://guild.host/ctto/events"
-  emoji: 🗓️
+  icon: guild.svg
+
 
 github:
   label: GitHub
