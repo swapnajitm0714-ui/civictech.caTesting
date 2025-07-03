@@ -49,18 +49,21 @@ layout: homepage
 
       <article class="card card-row filterRow" data-topics="{{ topics_string }}">
         <div class="row-content">
-        {% if event.image %}
-          <div class="hacknight-thumbnail">
-            <img src="{{ site.baseurl }}/assets/images/hacknights/thumbnails/{{ event.image }}" alt="{{ event.topic }}" class="hacknight-image">
-          </div>
-        {% endif %}
+
+          {% if event.image %}
+            <a href="{{ event.url }}">
+              <div class="hacknight-thumbnail">
+                <img src="{{ site.baseurl }}/assets/images/hacknights/thumbnails/{{ event.image }}" alt="{{ event.topic }}" class="hacknight-image">
+              </div>
+            </a>
+          {% endif %}
+
           <div class="row-text">
-            <small>{{ event.date | date: "%B %d, %Y" }}</small><br/>
-            <strong>Hacknight #{{ event.number }}</strong><br/>
+            <small>{{ event.date | date: "%B %d, %Y" }} — Hacknight #{{ event.number }}</small>
+            <br/>
             <a href="{{ event.url }}"><strong>{{ event.topic }}</strong></a>
             {% include topic-tags.html tags=event.tags %}
             {% if event.speakers %}
-              <br/>
               {% assign speakers_list = "" | split: "" %}
               {% for speaker in event.speakers %}
                 {% assign speaker_name = speaker | remove: '[[' | remove: ']]' %}
@@ -69,15 +72,13 @@ layout: homepage
               <small>with {{ speakers_list | join: ", " }}</small>
             {% endif %}
           </div>
-
-          <div class="row-actions">
-            <a role="button" href="{{ event.url }}">View</a>
-          </div>
         </div>
       </article>
     {% endfor %}
   </div>
-  <a href="{{ '/hacknights' | relative_url }}">See all Hacknights here.</a>
+  <div class="frontpage-action">
+    <a href="{{ '/hacknights' | relative_url }}">See all Hacknights here.</a>
+  </div>
 </section>
 
 
@@ -113,18 +114,16 @@ layout: homepage
               {% include topic-tags.html tags=project.tags %}
             {% endif %}
           </div>
-          <div class="row-actions">
-            {% if project.project_website %}
-              <a role="button" class="outline" href="{{ project.project_website }}" target="_blank" rel="noopener">Website</a>
-            {% endif %}
-            <a role="button" href="{{ project.url }}">View</a>
-          </div>
         </div>
       </article>
       {% endunless %}
     {% endfor %}
   </div>
-  <a href="{{ '/projects' | relative_url }}">See all projects here.</a>
+
+
+  <div class="frontpage-action">
+    <a href="{{ '/projects' | relative_url }}">See all projects here.</a>
+  </div>
 
 </section>
 

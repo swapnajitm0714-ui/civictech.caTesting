@@ -60,20 +60,32 @@ permalink: "/hacknights/"
       {% assign topics_string = formatted_topics | join: ", " %}
 
       <article class="card filterRow" data-topics="{{ topics_string }}">
-        <div class="card-body">
-          <small>{{ event.date | date: "%B %d, %Y" }} – Hacknight #{{ event.number }}</small>
-          <h3><a href="{{ event.url }}">{{ event.topic }}</a></h3>
-          {% include topic-tags.html tags=event.tags %}
-          {% if event.speakers %}
-            <p>
-              {% assign speakers_list = "" | split: "" %}
-              {% for speaker in event.speakers %}
-                {% assign speaker_name = speaker | remove: '[[' | remove: ']]' %}
-                {% assign speakers_list = speakers_list | push: speaker_name %}
-              {% endfor %}
-              <small>with {{ speakers_list | join: ", " }}</small>
-            </p>
+        <div class="row-content">
+
+          {% if event.image %}
+            <a href="{{ event.url }}">
+              <div class="hacknight-thumbnail">
+                <img data-src="{{ site.baseurl }}/assets/images/hacknights/thumbnails/{{ event.image }}" class="lazy-image" />
+              </div>
+            </a>
           {% endif %}
+
+          <div class="row-text">
+            <small>{{ event.date | date: "%B %d, %Y" }} – Hacknight #{{ event.number }}</small>
+            <br/>
+            <a href="{{ event.url }}"><strong>{{ event.topic }}</strong></a>
+            {% include topic-tags.html tags=event.tags %}
+            {% if event.speakers %}
+              <p>
+                {% assign speakers_list = "" | split: "" %}
+                {% for speaker in event.speakers %}
+                  {% assign speaker_name = speaker | remove: '[[' | remove: ']]' %}
+                  {% assign speakers_list = speakers_list | push: speaker_name %}
+                {% endfor %}
+                <small>with {{ speakers_list | join: ", " }}</small>
+              </p>
+            {% endif %}
+          </div>
         </div>
         <div class="card-footer">
           {% if event.eventUrl %}
@@ -106,13 +118,15 @@ permalink: "/hacknights/"
 
       <article class="card card-row filterRow" data-topics="{{ topics_string }}">
         <div class="row-content">
-        {% if event.image %}
-          <a href="{{ event.url }}">
-            <div class="hacknight-thumbnail">
-              <img data-src="{{ site.baseurl }}/assets/images/hacknights/thumbnails/{{ event.image }}" class="lazy-image" />
-            </div>
-          </a>
-        {% endif %}
+
+          {% if event.image %}
+            <a href="{{ event.url }}">
+              <div class="hacknight-thumbnail">
+                <img data-src="{{ site.baseurl }}/assets/images/hacknights/thumbnails/{{ event.image }}" class="lazy-image" />
+              </div>
+            </a>
+          {% endif %}
+
           <div class="row-text">
             <small>
               {{ event.date | date: "%B %d, %Y" }} – Hacknight #{{ event.number }}
