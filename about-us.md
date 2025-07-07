@@ -77,7 +77,7 @@ redirect_from: /get-in-touch/
               <img src="{{ site.baseurl }}/assets/images/organizations/{{ sponsor.image }}" alt="{{ sponsor.title }} Logo" class="hacknight-image">
             </div>
           {% endif %}
-            <a href="{{ sponsor.social.website }}">{{ sponsor.social.website }}</a>
+            <a href="{{ sponsor.social.website }}">Visit {{ sponsor.title }} website</a>
           {% endif %}
         </p>
       </hgroup>
