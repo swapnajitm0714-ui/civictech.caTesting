@@ -31,7 +31,6 @@ Requirements:
             {% for item in site.data.navigation.main %}
               <li>
                 <a href="{{ item.url | relative_url }}">
-                  {% if item.collection %}<span aria-hidden="true">::&nbsp;</span>{% endif %}
                   {{ item.label }}
                 </a>
               </li>
@@ -73,7 +72,6 @@ Requirements:
       {% for item in site.data.navigation.main %}
         <li>
           <a href="{{ item.url | relative_url }}">
-            {% if item.collection %}<span aria-hidden="true">::&nbsp;</span>{% endif %}
             {{ item.label }}
           </a>
         </li>
