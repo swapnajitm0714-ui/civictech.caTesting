@@ -70,18 +70,16 @@ redirect_from: /get-in-touch/
     <div>
       <hgroup>
         <h4>{{ sponsor.title }}</h4>
-        <p>
-          {% if sponsor.website %}
-          {% if sponsor.image %}
-            <div class="hacknight-thumbnail">
-              <img src="{{ site.baseurl }}/assets/images/organizations/{{ sponsor.image }}" alt="{{ sponsor.title }} Logo" class="hacknight-image">
-            </div>
-          {% endif %}
-            <a href="{{ sponsor.social.website }}">{{ sponsor.social.website }}</a>
-          {% else %}
-            No website listed
-          {% endif %}
-        </p>
+        {% if sponsor.social.website %}
+          <p>
+            {% if sponsor.image %}
+              <div class="hacknight-thumbnail">
+                <img src="{{ site.baseurl }}/assets/images/organizations/{{ sponsor.image }}" alt="{{ sponsor.title }} Logo" class="hacknight-image">
+              </div>
+            {% endif %}
+            <a href="{{ sponsor.social.website }}">Visit {{ sponsor.title }} website</a>
+          </p>
+        {% endif %}
       </hgroup>
     </div>
   {% endfor %}
