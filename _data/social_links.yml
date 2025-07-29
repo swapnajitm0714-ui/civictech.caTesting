@@ -31,3 +31,6 @@ bluesky:
 guild:
   label: Guild
   icon: guild.svg
+mastodon:
+  label: Mastodon
+  icon: mastodon.svg
