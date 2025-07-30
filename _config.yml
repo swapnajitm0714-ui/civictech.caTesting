@@ -15,6 +15,7 @@ timezone: America/Toronto
 future: true
 
 exclude:
+  - Makefile
   - .obsidian
   - .gitignore
   - .gitmodules
