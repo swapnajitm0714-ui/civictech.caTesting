@@ -12,7 +12,7 @@ clone:
 	git clone $(REPO_URL)
 
 # Install Ruby dependencies
-bundle:
+install:
 	bundle install
 
 # Start Jekyll server
@@ -37,7 +37,7 @@ generate-pages:
 generate: generate-data generate-pages
 
 # Update Git submodules
-update-submodules:
+update:
 	git submodule update --remote --merge
 
 # Clean Jekyll output
