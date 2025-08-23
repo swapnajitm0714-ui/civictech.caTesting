@@ -7,10 +7,6 @@ SCRIPTS_DIR=./_scripts
 # Default target
 all: serve
 
-# Clone the repository
-clone:
-	git clone $(REPO_URL)
-
 # Install Ruby dependencies
 install:
 	bundle install
@@ -44,4 +40,4 @@ update:
 clean:
 	rm -rf _site .jekyll-metadata
 
-.PHONY: all clone bundle serve serve-incremental generate-data generate-pages generate update-submodules clean
+.PHONY: all bundle serve serve-incremental generate-data generate-pages generate update-submodules clean

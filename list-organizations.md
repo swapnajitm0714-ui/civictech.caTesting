@@ -36,7 +36,7 @@ permalink: "/organizations/"
       {% if org.categories contains category %}
       <article class="card card-row">
         <div class="row-content">
-          <div class="row-text">
+          <div>
             <h3><a href="{{ org.url }}">{{ org.title }}</a></h3>
 
             {% if org.description %}
@@ -74,7 +74,7 @@ permalink: "/organizations/"
     {% for org in uncategorized_orgs %}
       <article class="card card-row">
         <div class="row-content">
-          <div class="row-text">
+          <div>
             <h3><a href="{{ org.url }}">{{ org.title }}</a></h3>
 
             {% if org.description %}

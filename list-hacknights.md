@@ -59,9 +59,8 @@ permalink: "/hacknights/"
       {% endfor %}
       {% assign topics_string = formatted_topics | join: ", " %}
 
-      <article class="card filterRow" data-topics="{{ topics_string }}">
+      <article class="card">
         <div class="row-content">
-
           {% if event.image %}
             <a href="{{ event.url }}">
               <div class="hacknight-thumbnail">
@@ -69,8 +68,7 @@ permalink: "/hacknights/"
               </div>
             </a>
           {% endif %}
-
-          <div class="row-text">
+          <div>
             <small>{{ event.date | date: "%B %d, %Y" }} – Hacknight #{{ event.number }}</small>
             <br/>
             <a href="{{ event.url }}"><strong>{{ event.topic }}</strong></a>
@@ -106,7 +104,10 @@ permalink: "/hacknights/"
     <h2>Past Hacknights</h2>
   </header>
   <div id="pastHacknightsList" class="card-list">
+
     {% for event in past_hacknights %}
+
+
       {% assign formatted_topics = "" | split: "," %}
       {% for tag in event.tags %}
         {% if tag contains "topic/" %}
@@ -114,9 +115,10 @@ permalink: "/hacknights/"
           {% assign formatted_topics = formatted_topics | push: topic_name %}
         {% endif %}
       {% endfor %}
+      
       {% assign topics_string = formatted_topics | join: ", " %}
 
-      <article class="card card-row filterRow" data-topics="{{ topics_string }}">
+      <article class="card card-row" data-topics="{{ topics_string }}">
         <div class="row-content">
 
           {% if event.image %}
@@ -127,7 +129,7 @@ permalink: "/hacknights/"
             </a>
           {% endif %}
 
-          <div class="row-text">
+          <div>
             <small>
               {{ event.date | date: "%B %d, %Y" }} – Hacknight #{{ event.number }}
             </small>
@@ -150,5 +152,7 @@ permalink: "/hacknights/"
         </div>
       </article>
     {% endfor %}
+
+
   </div>
 </section>

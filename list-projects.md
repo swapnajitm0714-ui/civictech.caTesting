@@ -78,9 +78,9 @@ permalink: "/projects/"
       {% endfor %}
       {% assign topics_string = formatted_topics | join: ", " %}
 
-      <article class="card card-row filterRow" data-topics="{{ topics_string }}">
+      <article class="card card-row">
         <div class="row-content">
-          <div class="row-text">
+          <div>
             <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
             {% if project.excerpt %}
               <p>{{ project.excerpt }}</p>
@@ -123,9 +123,9 @@ permalink: "/projects/"
       {% endfor %}
       {% assign topics_string = formatted_topics | join: ", " %}
 
-      <article class="card card-row filterRow" data-topics="{{ topics_string }}">
+      <article class="card card-row">
         <div class="row-content">
-          <div class="row-text">
+          <div>
             <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
             {% if project.excerpt %}
               <p>{{ project.excerpt }}</p>

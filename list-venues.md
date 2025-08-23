@@ -37,7 +37,7 @@ permalink: "/venues/"
     {% for venue in uncategorized_venues %}
       <article class="card card-row">
         <div class="row-content">
-          <div class="row-text">
+          <div>
             <h3><a href="{{ venue.url }}">{{ venue.title }}</a></h3>
 
             {% if venue.address %}
@@ -79,7 +79,7 @@ permalink: "/venues/"
       {% if venue.categories contains category %}
       <article class="card card-row">
         <div class="row-content">
-          <div class="row-text">
+          <div>
             <h3><a href="{{ venue.url }}">{{ venue.title }}</a></h3>
 
             {% if venue.address %}

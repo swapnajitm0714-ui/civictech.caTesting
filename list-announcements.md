@@ -15,7 +15,7 @@ permalink: "/announcements/"
     {% for post in all_announcements %}
       <article class="card card-row">
         <div class="row-content">
-          <div class="row-text">
+          <div>
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
             <p><small>
               {% if post.date %}{{ post.date | date: "%B %d, %Y" }}{% endif %}
