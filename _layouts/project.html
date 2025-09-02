@@ -57,6 +57,9 @@ layout: base
         </section>
       </div>
       <aside>
+        {% if page.image %}
+        <img class="ogimage" src="{{ page.image }}">
+        {% endif %}
         <h2>Project Information</h2>
         <dl>
           <dt>Categories</dt>

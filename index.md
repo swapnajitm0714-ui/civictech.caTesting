@@ -81,8 +81,6 @@ layout: homepage
   </div>
 </section>
 
-
-
 <!-- === Projects Feature ===  -->
 
 {% assign current_projects = site.projects | where_exp: "item", "item.categories contains 'meta/feature'" %}
@@ -91,7 +89,7 @@ layout: homepage
   <header>
     <h2>Current Featured Projects</h2>
   </header>
-  <div class="card-list">
+  <div class="grid">
     {% for project in current_projects %}
       {% unless project.feature %}
       {% assign formatted_topics = "" | split: "," %}
@@ -104,6 +102,11 @@ layout: homepage
       {% assign topics_string = formatted_topics | join: ", " %}
 
       <article class="card card-row">
+      <div>
+          {% if project.image %}
+          <img class="ogimage" src="{{ project.image }}">
+          {% endif %}
+          </div>
         <div class="row-content">
           <div>
             <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
