@@ -5,7 +5,7 @@ permalink: "/hacknights/"
 ---
 
 {% assign now = site.time %}
-{% assign future_hacknights = site.hacknights | where_exp: "item", "item.date > now" | sort: "date" |reverse %}
+{% assign future_hacknights = site.hacknights | where_exp: "item", "item.date > now" | sort: "date" %}
 {% assign past_hacknights = site.hacknights | where_exp: "item", "item.date <= now" | sort: "date" | reverse %}
 
 <!-- Extract unique topics for filters -->
@@ -49,7 +49,7 @@ permalink: "/hacknights/"
   </header>
   {% if future_hacknights.size > 0 %}
   <div id="hacknightsGrid" class="card-grid">
-    {% for event in future_hacknights %}
+    {% for event in future_hacknights limit: 3 %}
       {% assign formatted_topics = "" | split: "," %}
       {% for tag in event.tags %}
         {% if tag contains "topic/" %}
@@ -58,9 +58,8 @@ permalink: "/hacknights/"
         {% endif %}
       {% endfor %}
       {% assign topics_string = formatted_topics | join: ", " %}
-
       <article class="card">
-        <div class="row-content">
+        <div class="row-content row-content-column">
           {% if event.image %}
             <a href="{{ event.url }}">
               <div class="hacknight-thumbnail">
@@ -104,10 +103,7 @@ permalink: "/hacknights/"
     <h2>Past Hacknights</h2>
   </header>
   <div id="pastHacknightsList" class="card-list">
-
     {% for event in past_hacknights %}
-
-
       {% assign formatted_topics = "" | split: "," %}
       {% for tag in event.tags %}
         {% if tag contains "topic/" %}
@@ -115,12 +111,9 @@ permalink: "/hacknights/"
           {% assign formatted_topics = formatted_topics | push: topic_name %}
         {% endif %}
       {% endfor %}
-      
       {% assign topics_string = formatted_topics | join: ", " %}
-
       <article class="card card-row" data-topics="{{ topics_string }}">
         <div class="row-content">
-
           {% if event.image %}
             <a href="{{ event.url }}">
               <div class="hacknight-thumbnail">
@@ -128,7 +121,6 @@ permalink: "/hacknights/"
               </div>
             </a>
           {% endif %}
-
           <div>
             <small>
               {{ event.date | date: "%B %d, %Y" }} – Hacknight #{{ event.number }}
@@ -152,7 +144,5 @@ permalink: "/hacknights/"
         </div>
       </article>
     {% endfor %}
-
-
   </div>
 </section>

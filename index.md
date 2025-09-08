@@ -30,11 +30,64 @@ layout: homepage
 <!-- Past Hacknights -->
 
 {% assign now = site.time %}
+{% assign future_hacknights = site.hacknights | where_exp: "item", "item.date > now" | sort: "date" %}
 {% assign recent_hacknights = site.hacknights | where_exp: "item", "item.date <= now" | sort: "date" | reverse %}
 
 <section>
+  <h2>Events</h2>
+  {% if future_hacknights.size > 0 %}
   <header>
-    <h2>Recent Events</h2>
+    <h3>Upcoming</h3>
+  </header>
+  <div id="hacknightsGrid" class="card-grid">
+    {% for event in future_hacknights limit: 3 %}
+      {% assign formatted_topics = "" | split: "," %}
+      {% for tag in event.tags %}
+        {% if tag contains "topic/" %}
+          {% assign topic_name = tag | replace: "topic/", "" | capitalize %}
+          {% assign formatted_topics = formatted_topics | push: topic_name %}
+        {% endif %}
+      {% endfor %}
+      {% assign topics_string = formatted_topics | join: ", " %}
+      <article class="card">
+        <div class="row-content row-content-column">
+          {% if event.image %}
+            <a href="{{ event.url }}">
+              <div class="hacknight-thumbnail">
+                <img src="{{ site.baseurl }}/assets/images/hacknights/thumbnails/{{ event.image }}" alt="{{ event.topic }}" class="hacknight-image">
+              </div>
+            </a>
+          {% endif %}
+          <div>
+            <small>{{ event.date | date: "%B %d, %Y" }} – Hacknight #{{ event.number }}</small>
+            <br/>
+            <a href="{{ event.url }}"><strong>{{ event.topic }}</strong></a>
+            {% include topic-tags.html tags=event.tags %}
+            {% if event.speakers %}
+              <p>
+                {% assign speakers_list = "" | split: "" %}
+                {% for speaker in event.speakers %}
+                  {% assign speaker_name = speaker | remove: '[[' | remove: ']]' %}
+                  {% assign speakers_list = speakers_list | push: speaker_name %}
+                {% endfor %}
+                <small>with {{ speakers_list | join: ", " }}</small>
+              </p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="card-footer">
+          {% if event.eventUrl %}
+            <a role="button" class="outline" href="{{ event.eventUrl }}" target="_blank" rel="noopener">Registration<span aria-hidden="true">&nbsp;↗</span></a>
+          {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+    <p>All upcoming events will be listed on the <a href="https://guild.host/civic-tech-toronto/events" target="_blank" rel="noopener">Events Registration Page<span aria-hidden="true">&nbsp;↗</span></a></p>
+  {% endif %}
+
+  <header>
+    <h3>Recent</h3>
   </header>
   <div id="pastHacknightsList" class="grid">
     {% for event in recent_hacknights limit: 3 %}
@@ -48,8 +101,7 @@ layout: homepage
       {% assign topics_string = formatted_topics | join: ", " %}
 
       <article class="card card-row">
-        <div class="row-content">
-
+        <div class="row-content row-content-column">
           {% if event.image %}
             <a href="{{ event.url }}">
               <div class="hacknight-thumbnail">
@@ -57,7 +109,6 @@ layout: homepage
               </div>
             </a>
           {% endif %}
-
           <div>
             <small>{{ event.date | date: "%B %d, %Y" }} — Hacknight #{{ event.number }}</small>
             <br/>
@@ -76,6 +127,7 @@ layout: homepage
       </article>
     {% endfor %}
   </div>
+
   <div class="frontpage-action">
     <a href="{{ '/hacknights' | relative_url }}">See all Hacknights here.</a>
   </div>
