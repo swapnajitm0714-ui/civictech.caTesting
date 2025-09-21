@@ -37,5 +37,5 @@
 
 ## Notes
 - All files are maintained by Swapnajit Mohanty.  
-- Test artifacts are linked to the migrated site and serve as evidence for functional, performance, and accessibility validations.  
+- Test artifacts are linked to the migrated site and serve as evidence for functional, performance, and UI/UX validations.  
 - Test cases were executed on the locally hosted site using Jekyll (bundle exec jekyll serve).  
