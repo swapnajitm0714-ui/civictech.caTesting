@@ -13,7 +13,7 @@
    - Comprehensive test plan including: project overview, scope, objectives, features to be tested/not tested, test approach, environment, data, timelines, risks, assumptions, and entry/exit criteria.
 
 2. **02_Test Estimations_CivicTechTO.docx**  
-- Estimated testing effort, including person-days, task breakdown, and planned timelines.
+   - Estimated testing effort, including person-days, task breakdown, and planned timelines.
 
 3. **03_Test Cases_CivicTechTO.xlsx**  
    - Detailed test cases covering functional, UI/UX, content, accessibility, performance, and regression testing.  
